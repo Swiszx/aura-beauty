@@ -257,7 +257,7 @@ function Hero() {
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} size={12} className="fill-rose text-rose" />
                   ))}
-                  <span className="eyebrow text-pearl ml-2">{studio.social.rating.toFixed(1)} · Planity</span>
+                  <span className="eyebrow text-pearl ml-2">{studio.social.rating.toFixed(1)} · Google</span>
                 </div>
                 <p className="font-display italic text-pearl text-lg leading-snug mb-3">
                   {t('„Sehr entspannend und professionell."', '“Very relaxing and professional.”')}
@@ -493,12 +493,12 @@ function ProofStrip() {
                 )}
               </p>
               <a
-                href={studio.contact.planity}
+                href={studio.contact.googleReviews}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 text-sm tracking-widest uppercase text-rose hover:text-pearl transition-colors"
               >
-                {t('Bewertungen lesen', 'Read reviews')} <ArrowRight size={14} />
+                {t('Bewertungen auf Google lesen', 'Read reviews on Google')} <ArrowRight size={14} />
               </a>
             </Reveal>
           </div>
@@ -524,8 +524,8 @@ function ProofStrip() {
                   </p>
                   <p className="text-xs text-fog">
                     {t(
-                      `— Verifizierte Bewertung auf Planity (5,0 ★ aus ${studio.social.reviewCount})`,
-                      `— Verified review on Planity (5.0 ★ from ${studio.social.reviewCount})`
+                      '— Verifizierte Bewertung auf Planity',
+                      '— Verified review on Planity'
                     )}
                   </p>
                 </div>

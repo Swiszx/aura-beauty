@@ -220,12 +220,12 @@ export default function StudioPage() {
                   )}
                 </p>
                 <a
-                  href={studio.contact.planity}
+                  href={studio.contact.googleReviews}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-2 text-sm tracking-widest uppercase text-rose hover:text-pearl transition-colors"
                 >
-                  {t('Bewertungen lesen', 'Read reviews')} <ArrowRight size={14} />
+                  {t('Bewertungen auf Google', 'Read on Google')} <ArrowRight size={14} />
                 </a>
               </Reveal>
             </div>

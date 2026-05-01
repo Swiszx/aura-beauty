@@ -41,6 +41,7 @@ export const studio = {
     instagramHandle: "@aurabeauty.sw",
     facebook: "https://www.facebook.com/p/Aura-Beauty-61554794506176/",
     planity: "https://www.planity.com/de-DE/aura-beauty-schweinfurt-97421",
+    googleReviews: "https://www.google.com/maps/search/?api=1&query=Aura+Beauty+Schweinfurt+Niederwerrner",
     address: "Niederwerrner Str. 14 1/2",
   },
   hours: [
@@ -54,8 +55,8 @@ export const studio = {
   ],
   social: {
     rating: 5.0,
-    reviewCount: 13,
-    reviewSource: "Planity",
+    reviewCount: 102,
+    reviewSource: "Google",
     instagramHandle: "@aurabeauty.sw",
   },
   paymentsDE: ["Bar", "Karte", "Überweisung"],
@@ -408,7 +409,7 @@ export const philosophy = [
 
 export const studioFacts = [
   { eyebrowDE: 'Adresse', eyebrowEN: 'Address', value: 'Niederwerrner Str. 14 1/2, 97421 Schweinfurt' },
-  { eyebrowDE: 'Bewertung', eyebrowEN: 'Rating', valueDE: '5,0 / 5 · 13 Bewertungen auf Planity', valueEN: '5.0 / 5 · 13 reviews on Planity' },
+  { eyebrowDE: 'Bewertung', eyebrowEN: 'Rating', valueDE: '5,0 / 5 · 102 Bewertungen auf Google', valueEN: '5.0 / 5 · 102 reviews on Google' },
   { eyebrowDE: 'Behandlungen', eyebrowEN: 'Treatments', valueDE: 'Über 40 Behandlungen', valueEN: 'Over 40 treatments' },
   { eyebrowDE: 'Buchung', eyebrowEN: 'Booking', valueDE: 'Planity · WhatsApp · Telefon', valueEN: 'Planity · WhatsApp · Phone' },
 ];
