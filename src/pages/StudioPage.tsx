@@ -48,14 +48,14 @@ export default function StudioPage() {
                 <div className="space-y-5 text-mist leading-relaxed text-base md:text-lg max-w-2xl">
                   <p>
                     {t(
-                      'Mit Christina im Team werden hier Behandlungen mit ruhiger Hand und ehrlicher Beratung angeboten. Beratung in Deutsch und Türkisch — bei Fragen wird die richtige Empfehlung gegeben, auch wenn das heißt, eine Behandlung nicht zu empfehlen.',
-                      'With Christina on the team, treatments are offered with a calm hand and honest consultation. Consultation in German and Turkish — when in doubt, the right recommendation is given, even if that means not recommending a treatment.'
+                      'Christina ergänzt das Team — jede Behandlung mit Ruhe und ehrlicher Beratung. Wir beraten in Deutsch und Türkisch. Wenn eine Behandlung nicht zu dir passt, sagen wir es dir.',
+                      'Christina rounds out the team — every treatment with care and honest consultation. We consult in German and Turkish. If a treatment isn’t right for you, we’ll tell you.'
                     )}
                   </p>
                   <p>
                     {t(
-                      'Vor jeder Permanent-Make-up-Sitzung steht ein ruhiges Vorgespräch über Hauttyp, Form und Erwartung. Pigmente sind mineralisch, Mikronadel-Technik ist hand-präzise, Nachpflege gehört zum Termin dazu.',
-                      'Every permanent make-up session begins with a calm conversation about skin type, shape and expectation. Pigments are mineral, micro-needle technique is hand-precise, aftercare is part of every appointment.'
+                      'Vor jeder Permanent-Make-up-Sitzung steht ein ruhiges Vorgespräch über Hauttyp, Form und Erwartung. Mineralische Pigmente, präzise Mikronadel, Nachpflege ist im Termin dabei.',
+                      'Every permanent make-up session starts with a calm conversation about skin type, shape and expectations. Mineral pigments, precise micro-needle work, aftercare included.'
                     )}
                   </p>
                 </div>
@@ -99,9 +99,9 @@ export default function StudioPage() {
           <Reveal kind="rise-blur" scroll>
             <p className="eyebrow text-fog mb-4">{t('Team', 'Team')}</p>
             <h2 className="display-mega text-4xl md:text-6xl lg:text-7xl leading-[0.95] mb-12 md:mb-16">
-              {t('Zwei Hände,', 'Two pairs of hands,')}
+              {t('Zwei Artistinnen,', 'Two artists,')}
               <br />
-              <span className="display-italic text-rose">{t('vier Wimpern.', 'four sets of lashes.')}</span>
+              <span className="display-italic text-rose">{t('ein Studio.', 'one studio.')}</span>
             </h2>
           </Reveal>
           <Reveal kind="rise-blur" scroll>
