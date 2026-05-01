@@ -105,19 +105,20 @@ export default function StudioPage() {
             </h2>
           </Reveal>
           <Reveal kind="rise-blur" scroll>
-            <div
-              className="relative photo-tile rounded-3xl overflow-hidden border hairline aspect-[4/5] md:aspect-[16/10] max-h-[680px]"
-              style={{ backgroundImage: 'url(/photos/team.jpg)', backgroundPosition: 'center 30%' }}
-            >
-              <div className="relative z-10 h-full flex flex-col justify-end p-7 md:p-12">
-                <p className="eyebrow text-rose mb-3">{t('Inhaberin & Team', 'Owner & team')}</p>
-                <p className="font-display text-4xl md:text-6xl text-pearl leading-tight mb-2">
+            <div className="rounded-3xl overflow-hidden border hairline bg-bg-soft grid md:grid-cols-12">
+              <div
+                className="relative bg-cover md:col-span-7 aspect-[4/5] md:aspect-auto md:min-h-[420px]"
+                style={{ backgroundImage: 'url(/photos/team.jpg)', backgroundPosition: 'center 30%' }}
+              />
+              <div className="md:col-span-5 p-7 md:p-10 flex flex-col justify-center">
+                <p className="eyebrow text-rose mb-4">{t('Inhaberin & Team', 'Owner & team')}</p>
+                <p className="font-display text-4xl md:text-5xl text-pearl leading-tight mb-4">
                   Rabia <span className="display-italic text-rose">&</span> Christina
                 </p>
-                <p className="text-pearl-soft text-sm md:text-base max-w-md">
+                <p className="text-mist text-sm md:text-base leading-relaxed">
                   {t(
-                    'PMU Artist & Beauty-Spezialistin — gemeinsam in der Niederwerrner Straße.',
-                    'PMU artist & beauty specialist — together on Niederwerrner Straße.'
+                    'PMU Artist & Beauty-Spezialistin — gemeinsam im Studio in der Niederwerrner Straße. Beratung in Deutsch und Türkisch.',
+                    'PMU artist & beauty specialist — together at the studio on Niederwerrner Straße. Consultation in German and Turkish.'
                   )}
                 </p>
               </div>
