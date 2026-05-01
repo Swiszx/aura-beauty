@@ -6,7 +6,7 @@ import { useLocale } from '../i18n';
 export default function Footer() {
   const { t, pick } = useLocale();
   return (
-    <footer className="relative bg-bg-deep border-t hairline mt-32">
+    <footer className="relative bg-bg-deep border-t hairline mt-20 md:mt-32">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-rose/30 to-transparent" />
 
       <div className="relative max-w-[1400px] mx-auto px-5 md:px-10 pt-20 pb-10">
@@ -38,36 +38,36 @@ export default function Footer() {
 
           <div>
             <p className="eyebrow text-fog mb-5">{t('Kontakt', 'Contact')}</p>
-            <div className="space-y-3">
+            <div className="space-y-1">
               <a
                 href={studio.contact.whatsapp}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 text-mist hover:text-rose transition-colors"
+                className="flex items-center gap-3 text-mist hover:text-rose transition-colors py-2.5 -mx-2 px-2 rounded tap active:bg-pearl/[0.04]"
               >
-                <MessageCircle size={14} /> WhatsApp
+                <MessageCircle size={16} /> WhatsApp
               </a>
               <a
                 href={`tel:${studio.contact.phone}`}
-                className="flex items-center gap-2 text-mist hover:text-rose transition-colors"
+                className="flex items-center gap-3 text-mist hover:text-rose transition-colors py-2.5 -mx-2 px-2 rounded tap active:bg-pearl/[0.04]"
               >
-                <Phone size={14} /> {studio.contact.phoneDisplay}
+                <Phone size={16} /> {studio.contact.phoneDisplay}
               </a>
               <a
                 href={studio.contact.instagram}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 text-mist hover:text-rose transition-colors"
+                className="flex items-center gap-3 text-mist hover:text-rose transition-colors py-2.5 -mx-2 px-2 rounded tap active:bg-pearl/[0.04]"
               >
-                <Instagram size={14} /> {studio.contact.instagramHandle}
+                <Instagram size={16} /> {studio.contact.instagramHandle}
               </a>
               <a
                 href={studio.contact.planity}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 text-mist hover:text-rose transition-colors"
+                className="flex items-center gap-3 text-mist hover:text-rose transition-colors py-2.5 -mx-2 px-2 rounded tap active:bg-pearl/[0.04]"
               >
-                <span className="text-[14px]">◇</span> {t('Online via Planity', 'Online via Planity')}
+                <span className="text-[16px]">◇</span> {t('Online via Planity', 'Online via Planity')}
               </a>
             </div>
           </div>

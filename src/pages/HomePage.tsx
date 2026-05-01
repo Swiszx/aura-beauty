@@ -35,7 +35,7 @@ function Hero() {
   const headlineLines = pick(studio.hero.headlineDE, studio.hero.headlineEN).split('\n');
 
   return (
-    <section ref={ref} className="relative min-h-[100vh] md:min-h-[110vh] overflow-hidden bg-bg">
+    <section ref={ref} className="relative min-h-[92vh] md:min-h-[110vh] overflow-hidden bg-bg">
       {/* Photo lives only on the right ~45% on desktop; left is solid bg for guaranteed text legibility.
        * On mobile the photo sits behind the whole hero with a strong vertical scrim. */}
       <motion.div
@@ -165,7 +165,7 @@ function Hero() {
                 <span className="eyebrow text-pearl ml-2">{studio.social.rating.toFixed(1)} · Planity</span>
               </div>
               <p className="font-display italic text-pearl text-lg leading-snug mb-3">
-                {t('„Sehr professionell — ich komme wieder."', '“Very professional — I’m coming back.”')}
+                {t('„Sehr entspannend und professionell."', '“Very relaxing and professional.”')}
               </p>
               <p className="text-xs text-mist">
                 {t(
@@ -198,7 +198,7 @@ function Hero() {
 function ServiceConstellation() {
   const { t, pick } = useLocale();
   return (
-    <section className="relative py-24 md:py-40 px-5 md:px-10">
+    <section className="relative py-20 md:py-40 px-5 md:px-10">
       <div className="max-w-[1400px] mx-auto">
         <div className="grid md:grid-cols-12 gap-10 md:gap-14 mb-16 md:mb-20">
           <div className="md:col-span-5">
@@ -237,7 +237,7 @@ function ServiceConstellation() {
               >
                 <Link
                   to={`/leistungen#${s.id}`}
-                  className={`relative ${s.auraClass} block group rounded-3xl h-full overflow-hidden tile-hover hairline border flex flex-col`}
+                  className={`relative ${s.auraClass} block group rounded-3xl h-full overflow-hidden tile-hover tap hairline border flex flex-col`}
                 >
                   {/* Photo half */}
                   <div
@@ -279,7 +279,7 @@ function ServiceConstellation() {
 function Philosophy() {
   const { t, pick } = useLocale();
   return (
-    <section className="relative py-24 md:py-40 px-5 md:px-10 border-t hairline">
+    <section className="relative py-20 md:py-40 px-5 md:px-10 border-t hairline">
       <div className="max-w-[1400px] mx-auto">
         <div className="mb-16 md:mb-24 max-w-3xl">
           <p className="eyebrow text-fog mb-4">{t('Philosophie', 'Philosophy')}</p>
@@ -316,7 +316,7 @@ function Philosophy() {
 function PriceSnapshot() {
   const { t, pick } = useLocale();
   return (
-    <section className="relative py-24 md:py-40 px-5 md:px-10 border-t hairline bg-bg-soft">
+    <section className="relative py-20 md:py-40 px-5 md:px-10 border-t hairline bg-bg-soft">
       <div className="max-w-[1400px] mx-auto">
         <div className="grid md:grid-cols-12 gap-10 md:gap-14 mb-14 md:mb-20">
           <div className="md:col-span-5">
@@ -378,7 +378,7 @@ function PriceSnapshot() {
 function ProofStrip() {
   const { t } = useLocale();
   return (
-    <section className="relative py-24 md:py-32 px-5 md:px-10">
+    <section className="relative py-20 md:py-32 px-5 md:px-10">
       <div className="max-w-[1400px] mx-auto">
         <div className="grid md:grid-cols-12 gap-10 items-center">
           <div className="md:col-span-5">
@@ -422,12 +422,15 @@ function ProofStrip() {
                 </div>
                 <div className="p-6 md:p-9">
                   <p className="font-display italic text-pearl text-xl md:text-2xl mb-3 leading-snug">
-                    {t('„Sehr professionell, ich komme wieder."', '“Very professional, I’m coming back.”')}
+                    {t(
+                      '„Die Behandlung war sehr entspannend und professionell."',
+                      '“The treatment was very relaxing and professional.”'
+                    )}
                   </p>
                   <p className="text-xs text-fog">
                     {t(
-                      `— Eine von ${studio.social.reviewCount} Bewertungen auf Planity`,
-                      `— One of ${studio.social.reviewCount} reviews on Planity`
+                      `— Verifizierte Bewertung auf Planity (5,0 ★ aus ${studio.social.reviewCount})`,
+                      `— Verified review on Planity (5.0 ★ from ${studio.social.reviewCount})`
                     )}
                   </p>
                 </div>
@@ -443,7 +446,7 @@ function ProofStrip() {
 function FinalCTA() {
   const { t } = useLocale();
   return (
-    <section className="relative py-32 md:py-48 px-5 md:px-10 border-t hairline overflow-hidden bg-bg-soft">
+    <section className="relative py-24 md:py-48 px-5 md:px-10 border-t hairline overflow-hidden bg-bg-soft">
       <div className="relative max-w-[1200px] mx-auto text-center">
         <p className="eyebrow text-rose mb-6">{t('Termin', 'Booking')}</p>
         <Reveal kind="rise-blur" scroll>

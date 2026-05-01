@@ -40,6 +40,8 @@
     color: var(--color-pearl);
     -webkit-tap-highlight-color: transparent;
     scroll-behavior: smooth;
+    /* Standalone iOS PWA: respect notch/home indicator */
+    padding-top: env(safe-area-inset-top, 0px);
   }
   body {
     @apply bg-bg text-pearl font-sans antialiased;
@@ -47,6 +49,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: var(--color-bg);
+    /* Prevent rubber-band over-scroll on iOS so the site feels like an app */
+    overscroll-behavior-y: none;
   }
   ::selection {
     background: var(--color-copper);
@@ -58,6 +62,11 @@
   }
   input:focus, textarea:focus, select:focus { outline: none; }
   a, button, [role="button"] { touch-action: manipulation; }
+
+  /* App-like tap feedback: any anchor or button card gets a subtle press scale.
+   * Use the `tap` utility class on cards. */
+  .tap { transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1); }
+  .tap:active { transform: scale(0.985); }
 
   ::-webkit-scrollbar { width: 8px; height: 8px; }
   ::-webkit-scrollbar-track { background: var(--color-bg); }

@@ -82,10 +82,10 @@ export default function Header() {
             </Link>
             <button
               onClick={() => setOpen(true)}
-              className="md:hidden p-2 -mr-2 text-pearl"
+              className="md:hidden p-2.5 -mr-2.5 text-pearl tap active:opacity-70"
               aria-label={t('Menü öffnen', 'Open menu')}
             >
-              <Menu size={22} />
+              <Menu size={24} />
             </button>
           </div>
         </div>
@@ -115,13 +115,13 @@ export default function Header() {
               >
                 <X size={24} />
               </button>
-              <div className="mt-10 flex flex-col gap-5">
+              <div className="mt-8 flex flex-col">
                 {links.map(l => (
                   <NavLink
                     key={l.to}
                     to={l.to}
                     className={({ isActive }) =>
-                      `font-display text-[44px] leading-[1.05] font-light tracking-tight transition-colors ${
+                      `font-display text-[44px] leading-[1.05] font-light tracking-tight transition-colors py-3 tap active:opacity-70 ${
                         isActive ? 'text-rose' : 'text-pearl hover:text-rose'
                       }`
                     }
@@ -132,34 +132,34 @@ export default function Header() {
               </div>
               <Link
                 to="/termin"
-                className="cta-shimmer mt-10 inline-flex items-center justify-center gap-3 bg-pearl text-bg px-6 py-4 text-sm tracking-widest uppercase font-semibold rounded-full"
+                className="cta-shimmer tap mt-10 inline-flex items-center justify-center gap-3 bg-pearl text-bg px-6 py-4 text-sm tracking-widest uppercase font-semibold rounded-full active:bg-rose"
               >
                 {t('Termin buchen', 'Book appointment')}
               </Link>
-              <div className="mt-auto pt-10 border-t hairline space-y-3">
+              <div className="mt-auto pt-8 border-t hairline">
                 <a
                   href={studio.contact.whatsapp}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center gap-2 text-pearl text-sm font-medium hover:text-rose transition-colors py-1"
+                  className="flex items-center gap-3 text-pearl text-sm font-medium hover:text-rose transition-colors py-3 tap active:bg-pearl/[0.04] -mx-2 px-2 rounded"
                 >
-                  <MessageCircle size={16} /> WhatsApp · {studio.contact.whatsappDisplay}
+                  <MessageCircle size={18} /> WhatsApp · {studio.contact.whatsappDisplay}
                 </a>
                 <a
                   href={`tel:${studio.contact.phone}`}
-                  className="flex items-center gap-2 text-mist text-sm hover:text-pearl transition-colors py-1"
+                  className="flex items-center gap-3 text-mist text-sm hover:text-pearl transition-colors py-3 tap active:bg-pearl/[0.04] -mx-2 px-2 rounded"
                 >
-                  <Phone size={16} /> {studio.contact.phoneDisplay}
+                  <Phone size={18} /> {studio.contact.phoneDisplay}
                 </a>
                 <a
                   href={studio.contact.instagram}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center gap-2 text-mist text-sm hover:text-pearl transition-colors py-1"
+                  className="flex items-center gap-3 text-mist text-sm hover:text-pearl transition-colors py-3 tap active:bg-pearl/[0.04] -mx-2 px-2 rounded"
                 >
-                  <Instagram size={16} /> {studio.contact.instagramHandle}
+                  <Instagram size={18} /> {studio.contact.instagramHandle}
                 </a>
-                <p className="eyebrow text-fog mt-4">Schweinfurt · {studio.contact.address}</p>
+                <p className="eyebrow text-fog mt-5">Schweinfurt · {studio.contact.address}</p>
               </div>
             </motion.div>
           </motion.div>

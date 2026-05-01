@@ -26,7 +26,7 @@ export default function WhatsAppFAB() {
           rel="noreferrer"
           aria-label="Per WhatsApp anfragen"
           style={{ bottom: 'calc(1.25rem + env(safe-area-inset-bottom, 0px))' }}
-          className="fixed right-4 md:right-6 z-[110] flex items-center gap-2 bg-[#25D366] hover:bg-[#1da851] text-white shadow-2xl rounded-full pl-4 pr-5 py-3.5 md:py-4 transition-colors group"
+          className="hidden md:flex fixed right-6 z-[110] items-center gap-2 bg-[#25D366] hover:bg-[#1da851] text-white shadow-2xl rounded-full pl-4 pr-5 py-4 transition-colors group"
         >
           <span className="absolute inset-0 rounded-full opacity-50 blur-xl bg-[#25D366] -z-10" />
           <MessageCircle size={22} className="group-hover:scale-110 transition-transform" />

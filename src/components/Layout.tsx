@@ -3,6 +3,7 @@ import { useLocale } from '../i18n';
 import Header from './Header';
 import Footer from './Footer';
 import WhatsAppFAB from './WhatsAppFAB';
+import MobileActionBar from './MobileActionBar';
 import CookieBanner from './CookieBanner';
 import ScrollProgress from './ScrollProgress';
 
@@ -18,11 +19,14 @@ export default function Layout() {
       </a>
       <ScrollProgress />
       <Header />
-      <main id="main">
+      {/* Reserve room at the bottom of the page on mobile so content
+       * doesn't sit under the action bar. */}
+      <main id="main" className="pb-16 md:pb-0">
         <Outlet />
       </main>
       <Footer />
       <WhatsAppFAB />
+      <MobileActionBar />
       <CookieBanner />
     </div>
   );

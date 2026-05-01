@@ -48,8 +48,8 @@ export default function StudioPage() {
                 <div className="space-y-5 text-mist leading-relaxed text-base md:text-lg max-w-2xl">
                   <p>
                     {t(
-                      'Christina ergänzt das Team — jede Behandlung mit Ruhe und ehrlicher Beratung. Wir beraten in Deutsch und Türkisch. Wenn eine Behandlung nicht zu dir passt, sagen wir es dir.',
-                      'Christina rounds out the team — every treatment with care and honest consultation. We consult in German and Turkish. If a treatment isn’t right for you, we’ll tell you.'
+                      'Jede Behandlung mit Ruhe und ehrlicher Beratung. Wenn eine Behandlung nicht zu dir passt, sagen wir es dir.',
+                      'Every treatment with a calm pace and honest consultation. If a treatment isn’t right for you, we’ll tell you.'
                     )}
                   </p>
                   <p>
@@ -93,32 +93,33 @@ export default function StudioPage() {
         </div>
       </section>
 
-      {/* Team */}
+      {/* Owner */}
       <section className="px-5 md:px-10 mb-20 md:mb-28">
         <div className="max-w-[1400px] mx-auto">
           <Reveal kind="rise-blur" scroll>
-            <p className="eyebrow text-fog mb-4">{t('Team', 'Team')}</p>
+            <p className="eyebrow text-fog mb-4">{t('Inhaberin', 'Owner')}</p>
             <h2 className="display-mega text-4xl md:text-6xl lg:text-7xl leading-[0.95] mb-12 md:mb-16">
-              {t('Zwei Artistinnen,', 'Two artists,')}
-              <br />
-              <span className="display-italic text-rose">{t('ein Studio.', 'one studio.')}</span>
+              Rabia <span className="display-italic text-rose">Cihan.</span>
             </h2>
           </Reveal>
           <Reveal kind="rise-blur" scroll>
             <div className="rounded-3xl overflow-hidden border hairline bg-bg-soft grid md:grid-cols-12">
               <div
                 className="relative bg-cover md:col-span-7 aspect-[4/5] md:aspect-auto md:min-h-[420px]"
-                style={{ backgroundImage: 'url(/photos/team.jpg)', backgroundPosition: 'center 30%' }}
+                style={{ backgroundImage: 'url(/photos/rabia-studio.jpg)', backgroundPosition: 'center 25%' }}
               />
               <div className="md:col-span-5 p-7 md:p-10 flex flex-col justify-center">
-                <p className="eyebrow text-rose mb-4">{t('Inhaberin & Team', 'Owner & team')}</p>
-                <p className="font-display text-4xl md:text-5xl text-pearl leading-tight mb-4">
-                  Rabia <span className="display-italic text-rose">&</span> Christina
+                <p className="eyebrow text-rose mb-4">{t('PMU Artist · Schweinfurt', 'PMU artist · Schweinfurt')}</p>
+                <p className="font-display text-2xl md:text-3xl text-pearl leading-snug mb-4">
+                  {t(
+                    'Mein Studio in der Niederwerrner Straße — für Behandlungen mit Ruhe und ehrlicher Beratung.',
+                    'My studio on Niederwerrner Straße — for treatments with a calm pace and honest consultation.'
+                  )}
                 </p>
                 <p className="text-mist text-sm md:text-base leading-relaxed">
                   {t(
-                    'PMU Artist & Beauty-Spezialistin — gemeinsam im Studio in der Niederwerrner Straße. Beratung in Deutsch und Türkisch.',
-                    'PMU artist & beauty specialist — together at the studio on Niederwerrner Straße. Consultation in German and Turkish.'
+                    'Ich nehme mir Zeit für ein ruhiges Vorgespräch und empfehle nur das, was zu deiner Haut passt.',
+                    'I take time for a calm conversation first, and only recommend what suits your skin.'
                   )}
                 </p>
               </div>

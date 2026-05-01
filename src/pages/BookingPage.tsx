@@ -51,7 +51,7 @@ export default function BookingPage() {
                 href={studio.contact.planity}
                 target="_blank"
                 rel="noreferrer"
-                className="relative bg-bg-soft rounded-3xl p-7 md:p-9 block overflow-hidden tile-hover hairline border h-full hover:border-rose/40 transition-colors"
+                className="relative bg-bg-soft rounded-3xl p-7 md:p-9 block overflow-hidden tile-hover tap hairline border h-full hover:border-rose/40 transition-colors"
               >
                 <div className="relative z-10 flex flex-col h-full min-h-[260px]">
                   <Calendar size={24} className="text-rose mb-6" />
@@ -75,7 +75,7 @@ export default function BookingPage() {
                 href={studio.contact.whatsapp}
                 target="_blank"
                 rel="noreferrer"
-                className="relative bg-bg-soft rounded-3xl p-7 md:p-9 block overflow-hidden tile-hover hairline border h-full hover:border-rose/40 transition-colors"
+                className="relative bg-bg-soft rounded-3xl p-7 md:p-9 block overflow-hidden tile-hover tap hairline border h-full hover:border-rose/40 transition-colors"
               >
                 <div className="relative z-10 flex flex-col h-full min-h-[260px]">
                   <MessageCircle size={24} className="text-rose mb-6" />
@@ -97,7 +97,7 @@ export default function BookingPage() {
             <Reveal kind="rise-blur" scroll delay={0.2}>
               <a
                 href={`tel:${studio.contact.phone}`}
-                className="relative bg-bg-soft rounded-3xl p-7 md:p-9 block overflow-hidden tile-hover hairline border h-full hover:border-rose/40 transition-colors"
+                className="relative bg-bg-soft rounded-3xl p-7 md:p-9 block overflow-hidden tile-hover tap hairline border h-full hover:border-rose/40 transition-colors"
               >
                 <div className="relative z-10 flex flex-col h-full min-h-[260px]">
                   <Phone size={24} className="text-rose mb-6" />
@@ -141,7 +141,7 @@ export default function BookingPage() {
               const minPrice = paidPrices.length ? Math.min(...paidPrices) : 0;
               return (
                 <Reveal key={s.id} kind="rise" scroll delay={i * 0.05}>
-                  <Link to={`/leistungen#${s.id}`} className="flex items-baseline justify-between gap-4 py-5 border-b hairline group">
+                  <Link to={`/leistungen#${s.id}`} className="flex items-baseline justify-between gap-4 py-5 border-b hairline group tap active:bg-pearl/[0.03] -mx-3 px-3 rounded-md">
                     <div>
                       <p className="eyebrow text-fog mb-1">{pick(s.eyebrowDE, s.eyebrowEN)}</p>
                       <p className="font-display text-xl md:text-2xl text-pearl group-hover:text-rose transition-colors">

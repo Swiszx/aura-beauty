@@ -1,9 +1,8 @@
 // All facts verified against the Planity profile of Aura Beauty Schweinfurt:
 // https://www.planity.com/de-DE/aura-beauty-schweinfurt-97421
 // Plus @aurabeauty.sw IG and the Facebook page.
-//
-// Bilingual DE/EN — Schweinfurt's beauty market includes German locals,
-// Turkish-speaking community and English-speaking US Garrison families.
+// Site is bilingual DE/EN — Schweinfurt has a sizeable English-speaking
+// US Garrison community alongside German locals.
 
 export const studio = {
   name: "Aura Beauty",
@@ -23,7 +22,6 @@ export const studio = {
   },
   team: [
     { firstName: "Rabia", roleDE: "Inhaberin & PMU Artist", roleEN: "Owner & PMU Artist", photo: "/photos/team.jpg" },
-    { firstName: "Christina", roleDE: "Beauty-Spezialistin", roleEN: "Beauty Specialist", photo: "/photos/team.jpg" },
   ],
   hero: {
     eyebrowDE: "Studio · Schweinfurt",
@@ -411,7 +409,7 @@ export const philosophy = [
 export const studioFacts = [
   { eyebrowDE: 'Adresse', eyebrowEN: 'Address', value: 'Niederwerrner Str. 14 1/2, 97421 Schweinfurt' },
   { eyebrowDE: 'Bewertung', eyebrowEN: 'Rating', valueDE: '5,0 / 5 · 13 Bewertungen auf Planity', valueEN: '5.0 / 5 · 13 reviews on Planity' },
-  { eyebrowDE: 'Sprache', eyebrowEN: 'Languages', valueDE: 'Deutsch · Türkisch · English', valueEN: 'German · Turkish · English' },
+  { eyebrowDE: 'Behandlungen', eyebrowEN: 'Treatments', valueDE: 'Über 40 Behandlungen', valueEN: 'Over 40 treatments' },
   { eyebrowDE: 'Buchung', eyebrowEN: 'Booking', valueDE: 'Planity · WhatsApp · Telefon', valueEN: 'Planity · WhatsApp · Phone' },
 ];
 
