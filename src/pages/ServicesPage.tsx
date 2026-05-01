@@ -3,23 +3,20 @@ import { useParams, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowRight, MessageCircle, Clock, Sparkles } from 'lucide-react';
 import { studio, services, type ServiceFamily, formatPrice } from '../data';
-import AuroraBackground from '../components/AuroraBackground';
+import { useLocale } from '../i18n';
 import Reveal from '../components/Reveal';
 import RevealText from '../components/RevealText';
 
 export default function ServicesPage() {
   const { id } = useParams();
+  const { t, pick } = useLocale();
 
-  // Scroll to anchor after mount
   useEffect(() => {
     if (!id) return;
     const el = document.getElementById(id);
-    if (el) {
-      setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
-    }
+    if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
   }, [id]);
 
-  // Also handle hash scroll (for /leistungen#pmu links)
   useEffect(() => {
     const hash = window.location.hash?.slice(1);
     if (hash) {
@@ -30,7 +27,7 @@ export default function ServicesPage() {
 
   return (
     <div className="bg-bg text-pearl min-h-screen pt-32 md:pt-40 pb-24">
-      {/* Page intro */}
+      {/* Page intro — clean, no aurora */}
       <div className="px-5 md:px-10 mb-20 md:mb-28">
         <div className="max-w-[1400px] mx-auto">
           <motion.p
@@ -39,12 +36,12 @@ export default function ServicesPage() {
             transition={{ delay: 0.1, duration: 0.5 }}
             className="eyebrow text-rose mb-6"
           >
-            Leistungen
+            {t('Leistungen', 'Services')}
           </motion.p>
           <h1 className="display-mega text-6xl sm:text-7xl md:text-9xl lg:text-[10rem] leading-[0.95] mb-8" translate="no">
-            <RevealText text="Fünf" by="letter" delay={0.2} stagger={0.05} duration={0.85} className="inline-block" />
+            <RevealText text={t('Fünf', 'Five')} by="letter" delay={0.2} stagger={0.05} duration={0.85} className="inline-block" />
             <span>&nbsp;</span>
-            <RevealText text="Auras." by="letter" delay={0.45} stagger={0.05} duration={0.85} className="display-italic text-aurora inline-block" />
+            <RevealText text={t('Auras.', 'auras.')} by="letter" delay={0.45} stagger={0.05} duration={0.85} className="display-italic text-rose inline-block" />
           </h1>
           <motion.p
             initial={{ opacity: 0, y: 12 }}
@@ -52,17 +49,18 @@ export default function ServicesPage() {
             transition={{ delay: 1.0, duration: 0.6 }}
             className="text-mist max-w-2xl text-base md:text-lg leading-relaxed"
           >
-            Permanent Make-up, Wimpern, Brauen, Skin und Body. Jede Behandlung mit Beratung, Pflegeplan und
-            ehrlicher Einschätzung — keine Behandlung ohne Vorgespräch.
+            {t(
+              'Permanent Make-up, Wimpern, Brauen, Skin und Body. Jede Behandlung mit Beratung, Pflegeplan und ehrlicher Einschätzung — keine Behandlung ohne Vorgespräch.',
+              'Permanent make-up, lashes, brows, skin and body. Every treatment includes consultation, an aftercare plan and an honest assessment — no treatment without a conversation first.'
+            )}
           </motion.p>
 
-          {/* Anchor jumps */}
           <motion.nav
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.6 }}
             className="mt-12 flex flex-wrap gap-2"
-            aria-label="Sprungmenü"
+            aria-label={t('Sprungmenü', 'Quick nav')}
           >
             {services.map(s => (
               <a
@@ -70,14 +68,13 @@ export default function ServicesPage() {
                 href={`#${s.id}`}
                 className="px-4 py-2.5 rounded-full text-xs tracking-widest uppercase border border-pearl/15 text-mist hover:border-rose hover:text-pearl transition-colors"
               >
-                {s.id === 'pmu' ? 'PMU' : s.id === 'lashes' ? 'Wimpern' : s.id === 'brows' ? 'Brauen' : s.id === 'skin' ? 'Skin' : 'Body'}
+                {pick(s.shortLabelDE, s.shortLabelEN)}
               </a>
             ))}
           </motion.nav>
         </div>
       </div>
 
-      {/* Each service as a full section */}
       {services.map((s, i) => (
         <ServiceSection key={s.id} service={s} reverse={i % 2 === 1} />
       ))}
@@ -87,13 +84,16 @@ export default function ServicesPage() {
         <div className="max-w-[1200px] mx-auto text-center">
           <Reveal kind="rise-blur" scroll>
             <h2 className="display-mega text-4xl md:text-6xl mb-8">
-              Unsicher, <span className="display-italic text-aurora">welche?</span>
+              {t('Unsicher,', 'Not sure')}{' '}
+              <span className="display-italic text-rose">{t('welche?', 'which?')}</span>
             </h2>
           </Reveal>
           <Reveal kind="rise" scroll delay={0.1}>
             <p className="text-mist max-w-md mx-auto mb-10 leading-relaxed">
-              Schreib einfach kurz auf WhatsApp, was du im Kopf hast. Wir antworten mit Empfehlung — kein
-              Verkaufsgespräch.
+              {t(
+                'Schreib einfach kurz auf WhatsApp, was du im Kopf hast. Wir antworten mit Empfehlung — kein Verkaufsgespräch.',
+                'Just send a short WhatsApp with what you have in mind. We reply with a recommendation — no sales pitch.'
+              )}
             </p>
             <a
               href={studio.contact.whatsapp}
@@ -101,7 +101,7 @@ export default function ServicesPage() {
               rel="noreferrer"
               className="cta-shimmer inline-flex items-center gap-3 bg-pearl text-bg font-semibold px-8 py-4 text-sm tracking-widest uppercase rounded-full hover:bg-rose transition-colors"
             >
-              <MessageCircle size={16} /> Kurz fragen
+              <MessageCircle size={16} /> {t('Kurz fragen', 'Quick question')}
             </a>
           </Reveal>
         </div>
@@ -111,39 +111,37 @@ export default function ServicesPage() {
 }
 
 function ServiceSection({ service: s, reverse }: { service: ServiceFamily; reverse: boolean }) {
+  const { t, pick, locale } = useLocale();
   return (
     <section id={s.id} className="relative scroll-mt-24 mb-16 md:mb-24 px-5 md:px-10">
+      {/* Per-service aura class is the only color treatment — no extra aurora layer. */}
       <div className={`relative max-w-[1400px] mx-auto rounded-3xl overflow-hidden ${s.auraClass} border hairline`}>
-        <AuroraBackground intensity="soft" />
-
         <div className="relative z-10 p-7 md:p-14 lg:p-20">
           <div className={`grid md:grid-cols-12 gap-10 md:gap-14 ${reverse ? 'md:[direction:rtl]' : ''}`}>
-            {/* Headline column */}
             <div className="md:col-span-5 md:[direction:ltr]">
-              <p className="eyebrow text-rose mb-5">{s.eyebrow}</p>
+              <p className="eyebrow text-rose mb-5">{pick(s.eyebrowDE, s.eyebrowEN)}</p>
               <Reveal kind="rise-blur" scroll>
                 <h2 className="display-mega text-4xl md:text-5xl lg:text-6xl leading-[0.95] mb-6">
-                  {s.title}
+                  {pick(s.titleDE, s.titleEN)}
                   <br />
-                  <span className="display-italic text-aurora">{s.italic}</span>
+                  <span className="display-italic text-rose">{pick(s.italicDE, s.italicEN)}</span>
                 </h2>
               </Reveal>
               <Reveal kind="rise" scroll delay={0.1}>
                 <p className="font-display italic text-pearl/90 text-lg md:text-xl mb-8 leading-relaxed">
-                  {s.tagline}
+                  {pick(s.taglineDE, s.taglineEN)}
                 </p>
                 <p className="text-mist text-sm md:text-base leading-relaxed mb-10 md:mb-12">
-                  {s.description}
+                  {pick(s.descriptionDE, s.descriptionEN)}
                 </p>
               </Reveal>
 
-              {/* Ritual */}
               <Reveal kind="rise" scroll delay={0.2}>
                 <p className="eyebrow text-fog mb-5 inline-flex items-center gap-2">
-                  <Sparkles size={12} className="text-rose" /> Ablauf
+                  <Sparkles size={12} className="text-rose" /> {t('Ablauf', 'Ritual')}
                 </p>
                 <ol className="space-y-3 mb-10">
-                  {s.ritual.map((step, i) => (
+                  {pick(s.ritualDE, s.ritualEN).map((step, i) => (
                     <li key={i} className="flex items-start gap-4">
                       <span className="font-mono text-xs text-fog mt-1 w-6 flex-shrink-0">0{i + 1}</span>
                       <span className="text-pearl/90 text-sm md:text-base">{step}</span>
@@ -153,25 +151,28 @@ function ServiceSection({ service: s, reverse }: { service: ServiceFamily; rever
               </Reveal>
             </div>
 
-            {/* Treatments + price column */}
             <div className="md:col-span-6 md:col-start-7 md:[direction:ltr]">
               <Reveal kind="rise-blur" scroll delay={0.15}>
-                <div className="glass rounded-2xl p-6 md:p-8">
-                  <p className="eyebrow text-fog mb-6">Behandlungen</p>
+                <div className="rounded-2xl p-6 md:p-8 border hairline bg-bg/50 backdrop-blur-sm">
+                  <p className="eyebrow text-fog mb-6">{t('Behandlungen', 'Treatments')}</p>
                   <ul className="divide-y hairline">
-                    {s.treatments.map(t => (
-                      <li key={t.name} className="py-4 first:pt-0 last:pb-0">
+                    {s.treatments.map(t2 => (
+                      <li key={t2.nameDE} className="py-4 first:pt-0 last:pb-0">
                         <div className="flex items-baseline justify-between gap-4 mb-1">
-                          <span className="font-display text-lg md:text-xl text-pearl">{t.name}</span>
-                          <span className="font-display text-aurora text-xl md:text-2xl whitespace-nowrap">
-                            {formatPrice(t.price)}
+                          <span className="font-display text-lg md:text-xl text-pearl">
+                            {pick(t2.nameDE, t2.nameEN)}
+                          </span>
+                          <span className="font-display text-rose text-xl md:text-2xl whitespace-nowrap">
+                            {formatPrice(t2.price, locale)}
                           </span>
                         </div>
                         <div className="flex items-baseline justify-between gap-4">
-                          <span className="text-xs text-mist/80">{t.note ?? ''}</span>
-                          {t.duration && (
+                          <span className="text-xs text-mist/80">
+                            {t2.noteDE && pick(t2.noteDE, t2.noteEN ?? t2.noteDE)}
+                          </span>
+                          {t2.duration && (
                             <span className="inline-flex items-center gap-1.5 text-xs text-fog font-mono">
-                              <Clock size={11} /> {t.duration}
+                              <Clock size={11} /> {t2.duration}
                             </span>
                           )}
                         </div>
@@ -180,10 +181,12 @@ function ServiceSection({ service: s, reverse }: { service: ServiceFamily; rever
                   </ul>
                 </div>
 
-                {s.aftercare && (
+                {(s.aftercareDE || s.aftercareEN) && (
                   <div className="mt-5 px-6 md:px-8 py-5 md:py-6 rounded-2xl border hairline bg-bg/40">
-                    <p className="eyebrow text-rose mb-2">Nachpflege</p>
-                    <p className="text-mist text-xs md:text-sm leading-relaxed">{s.aftercare}</p>
+                    <p className="eyebrow text-rose mb-2">{t('Nachpflege', 'Aftercare')}</p>
+                    <p className="text-mist text-xs md:text-sm leading-relaxed">
+                      {pick(s.aftercareDE ?? '', s.aftercareEN ?? s.aftercareDE ?? '')}
+                    </p>
                   </div>
                 )}
 
@@ -192,7 +195,7 @@ function ServiceSection({ service: s, reverse }: { service: ServiceFamily; rever
                     to="/termin"
                     className="cta-shimmer flex-1 inline-flex items-center justify-center gap-2 bg-pearl text-bg font-semibold px-6 py-3.5 text-sm tracking-widest uppercase rounded-full hover:bg-rose transition-colors"
                   >
-                    Termin <ArrowRight size={14} />
+                    {t('Termin', 'Book')} <ArrowRight size={14} />
                   </Link>
                   <a
                     href={studio.contact.whatsapp}

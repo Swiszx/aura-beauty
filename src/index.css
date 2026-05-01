@@ -46,12 +46,7 @@
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background:
-      radial-gradient(at 8% 12%, rgba(142, 95, 168, 0.18) 0%, transparent 45%),
-      radial-gradient(at 92% 88%, rgba(212, 134, 107, 0.12) 0%, transparent 45%),
-      radial-gradient(at 50% 50%, rgba(232, 168, 180, 0.05) 0%, transparent 60%),
-      var(--color-bg);
-    background-attachment: fixed;
+    background: var(--color-bg);
   }
   ::selection {
     background: var(--color-copper);

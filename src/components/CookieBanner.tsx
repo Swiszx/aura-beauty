@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLocale } from '../i18n';
 
 const KEY = 'aura-cookie-consent';
 
 export default function CookieBanner() {
+  const { t } = useLocale();
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -34,24 +36,27 @@ export default function CookieBanner() {
           role="dialog"
           aria-label="Cookie consent"
         >
-          <div className="glass-soft rounded-2xl p-5 md:p-6 text-pearl flex flex-col md:flex-row gap-4 md:items-center shadow-2xl">
+          <div className="rounded-2xl p-5 md:p-6 text-pearl flex flex-col md:flex-row gap-4 md:items-center shadow-2xl border hairline bg-bg-soft/95 backdrop-blur-xl">
             <div className="flex items-start gap-3 flex-1">
               <div className="w-10 h-10 rounded-full bg-rose/15 text-rose flex items-center justify-center flex-shrink-0 text-base">
                 ✦
               </div>
               <div className="text-sm">
-                <p className="font-semibold mb-1">Cookies</p>
+                <p className="font-semibold mb-1">{t('Cookies', 'Cookies')}</p>
                 <p className="text-mist">
-                  Nur technisch notwendige Cookies (Sprache, Banner-Zustimmung). Kein Tracking. Details in der{' '}
+                  {t(
+                    'Nur technisch notwendige Cookies (Sprache, Banner-Zustimmung). Kein Tracking. Details in der ',
+                    'Only essential cookies (language preference, banner consent). No tracking. Details in our '
+                  )}
                   <Link to="/datenschutz" className="underline hover:text-rose">
-                    Datenschutzerklärung
+                    {t('Datenschutzerklärung', 'privacy policy')}
                   </Link>.
                 </p>
               </div>
               <button
                 onClick={accept}
                 className="md:hidden p-2 -m-2 text-mist hover:text-pearl"
-                aria-label="Schließen"
+                aria-label={t('Schließen', 'Close')}
               >
                 <X size={18} />
               </button>
@@ -61,7 +66,7 @@ export default function CookieBanner() {
                 onClick={accept}
                 className="flex-1 md:flex-none px-6 py-2.5 rounded-full bg-pearl text-bg text-sm font-semibold hover:bg-rose transition-colors"
               >
-                Verstanden
+                {t('Verstanden', 'Got it')}
               </button>
             </div>
           </div>

@@ -3,17 +3,20 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, Instagram, MessageCircle, Phone } from 'lucide-react';
 import { studio } from '../data';
-
-const links = [
-  { to: '/leistungen', label: 'Leistungen' },
-  { to: '/studio', label: 'Studio' },
-  { to: '/termin', label: 'Termin' },
-];
+import { useLocale } from '../i18n';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Header() {
+  const { t } = useLocale();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  const links = [
+    { to: '/leistungen', label: t('Leistungen', 'Services') },
+    { to: '/studio', label: t('Studio', 'Studio') },
+    { to: '/termin', label: t('Termin', 'Booking') },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -28,7 +31,9 @@ export default function Header() {
     <>
       <header
         className={`fixed top-0 inset-x-0 z-40 transition-all duration-500 ${
-          scrolled ? 'bg-bg/80 backdrop-blur-2xl border-b hairline' : 'bg-transparent'
+          scrolled
+            ? 'bg-bg/85 backdrop-blur-2xl border-b hairline'
+            : 'bg-bg/40 backdrop-blur-md'
         }`}
       >
         <div className="max-w-[1400px] mx-auto px-5 md:px-10 h-16 md:h-20 flex items-center justify-between gap-6">
@@ -38,11 +43,10 @@ export default function Header() {
             translate="no"
             aria-label="Aura Beauty Schweinfurt"
           >
-            <span className="font-display text-3xl md:text-[34px] font-light tracking-tight leading-none">
-              <span className="text-aurora">Aura</span>
-              <span className="text-pearl">.</span>
+            <span className="font-display text-3xl md:text-[34px] font-light tracking-tight leading-none text-pearl">
+              Aura<span className="text-rose">.</span>
             </span>
-            <span className="hidden md:inline-block eyebrow text-mist">Beauty</span>
+            <span className="hidden md:inline-block eyebrow text-fog">Beauty</span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-9">
@@ -69,16 +73,17 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-3 md:gap-4">
+            <LanguageSwitcher />
             <Link
               to="/termin"
               className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 text-[12px] tracking-widest uppercase font-medium border border-pearl/30 hover:border-rose hover:text-rose text-pearl transition-colors rounded-full"
             >
-              Termin
+              {t('Termin', 'Book')}
             </Link>
             <button
               onClick={() => setOpen(true)}
               className="md:hidden p-2 -mr-2 text-pearl"
-              aria-label="Menü öffnen"
+              aria-label={t('Menü öffnen', 'Open menu')}
             >
               <Menu size={22} />
             </button>
@@ -106,7 +111,7 @@ export default function Header() {
               <button
                 onClick={() => setOpen(false)}
                 className="self-end p-2 -mr-2 text-pearl"
-                aria-label="Schließen"
+                aria-label={t('Schließen', 'Close')}
               >
                 <X size={24} />
               </button>
@@ -117,7 +122,7 @@ export default function Header() {
                     to={l.to}
                     className={({ isActive }) =>
                       `font-display text-[44px] leading-[1.05] font-light tracking-tight transition-colors ${
-                        isActive ? 'text-aurora' : 'text-pearl hover:text-rose'
+                        isActive ? 'text-rose' : 'text-pearl hover:text-rose'
                       }`
                     }
                   >
@@ -129,7 +134,7 @@ export default function Header() {
                 to="/termin"
                 className="cta-shimmer mt-10 inline-flex items-center justify-center gap-3 bg-pearl text-bg px-6 py-4 text-sm tracking-widest uppercase font-semibold rounded-full"
               >
-                Termin buchen
+                {t('Termin buchen', 'Book appointment')}
               </Link>
               <div className="mt-auto pt-10 border-t hairline space-y-3">
                 <a
