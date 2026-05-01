@@ -35,20 +35,28 @@ function Hero() {
   const headlineLines = pick(studio.hero.headlineDE, studio.hero.headlineEN).split('\n');
 
   return (
-    <section ref={ref} className="relative min-h-[92vh] md:min-h-[110vh] overflow-hidden bg-bg">
-      {/* Photo lives only on the right ~45% on desktop; left is solid bg for guaranteed text legibility.
-       * On mobile the photo sits behind the whole hero with a strong vertical scrim. */}
+    <section ref={ref} className="relative min-h-[100vh] md:min-h-[110vh] overflow-hidden bg-bg">
+      {/* === Backgrounds (different per breakpoint, both with parallax) === */}
+
+      {/* Desktop: wide-shot photo on the right ~60%, solid bg on the left */}
       <motion.div
-        style={{
-          y: bgY,
-          scale: bgScale,
-          backgroundImage: 'url(/photos/neon-wide.jpg)',
-        }}
-        className="absolute inset-0 md:left-[40%] bg-cover bg-center will-change-transform"
+        style={{ y: bgY, scale: bgScale, backgroundImage: 'url(/photos/neon-wide.jpg)' }}
+        className="hidden md:block absolute inset-0 md:left-[40%] bg-cover bg-center will-change-transform"
         aria-hidden="true"
       />
 
-      {/* Desktop: solid-to-clear horizontal scrim so the text column is on real darkness, not on the photo. */}
+      {/* Mobile: brand-mark close-up at top of viewport, text below it on solid bg.
+       * The photo only fills the top portion so the "Aura Beauty" neon stays in frame
+       * and never gets cut off by a portrait crop. */}
+      <motion.div
+        style={{ y: bgY, scale: bgScale, backgroundImage: 'url(/photos/neon-pmu.jpg)' }}
+        className="md:hidden absolute top-0 inset-x-0 h-[52vh] bg-cover bg-center will-change-transform"
+        aria-hidden="true"
+      />
+
+      {/* === Scrims === */}
+
+      {/* Desktop horizontal scrim */}
       <div
         className="hidden md:block absolute inset-0 pointer-events-none"
         style={{
@@ -57,12 +65,14 @@ function Hero() {
         }}
         aria-hidden="true"
       />
-      {/* Mobile: vertical scrim so headline & buttons read against the photo. */}
+
+      {/* Mobile: only a soft fade at the very bottom of the photo so it merges into the solid bg.
+       * Top of the photo is fully visible — brand mark always readable. */}
       <div
-        className="md:hidden absolute inset-0 pointer-events-none"
+        className="md:hidden absolute top-0 inset-x-0 h-[52vh] pointer-events-none"
         style={{
           background:
-            'linear-gradient(180deg, rgba(11,7,16,0.70) 0%, rgba(11,7,16,0.85) 60%, var(--color-bg) 100%)',
+            'linear-gradient(180deg, rgba(11,7,16,0.10) 0%, rgba(11,7,16,0.10) 55%, rgba(11,7,16,0.55) 80%, var(--color-bg) 100%)',
         }}
         aria-hidden="true"
       />
@@ -74,30 +84,35 @@ function Hero() {
         transition={{ delay: 0.1, duration: 0.6 }}
         className="absolute top-20 md:top-28 left-0 right-0 px-5 md:px-10 z-20 flex items-center justify-between eyebrow"
       >
-        <span className="text-pearl/80">{pick(studio.hero.eyebrowDE, studio.hero.eyebrowEN)}</span>
+        <span className="text-pearl bg-bg/45 backdrop-blur-sm px-3 py-1.5 rounded-full md:bg-transparent md:backdrop-blur-0 md:p-0 md:text-pearl/80">
+          {pick(studio.hero.eyebrowDE, studio.hero.eyebrowEN)}
+        </span>
         <span className="hidden md:inline-flex items-center gap-2 text-pearl/80">
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-rose animate-pulse" />
           {t('Termine offen', 'Booking open')}
         </span>
       </motion.div>
 
-      {/* Headline column — sits on solid bg on the left half, max readability */}
+      {/* Headline column — desktop: vertically centered; mobile: pushed below the photo */}
       <motion.div
         style={{ y: titleY, opacity: fadeOut }}
-        className="absolute inset-0 flex items-center px-5 md:px-10 z-20"
+        className="absolute inset-0 z-20 flex flex-col md:items-center md:justify-center px-5 md:px-10"
       >
-        <div className="max-w-[1400px] mx-auto w-full grid md:grid-cols-12 gap-10">
+        {/* Mobile spacer — reserves room for the photo on top */}
+        <div className="md:hidden h-[52vh] flex-shrink-0" aria-hidden="true" />
+
+        <div className="max-w-[1400px] mx-auto w-full md:grid md:grid-cols-12 md:gap-10 pt-7 md:pt-0">
           <div className="md:col-span-7 lg:col-span-6">
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="eyebrow text-rose mb-6 md:mb-10"
+              className="eyebrow text-rose mb-5 md:mb-10"
             >
               {pick(studio.taglineDE, studio.taglineEN)}
             </motion.p>
 
-            <h1 className="display-mega text-[14vw] sm:text-[11vw] md:text-[8vw] lg:text-[6.8vw] xl:text-[6.2vw] leading-[0.92]" translate="no">
+            <h1 className="display-mega text-[12.5vw] sm:text-[10vw] md:text-[8vw] lg:text-[6.8vw] xl:text-[6.2vw] leading-[0.95]" translate="no">
               {headlineLines.map((line, i) => {
                 const isItalic = i === 1;
                 return (
@@ -119,9 +134,9 @@ function Hero() {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.3, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-8 md:mt-12 max-w-md"
+              className="mt-5 md:mt-12 max-w-md"
             >
-              <p className="text-mist text-base md:text-lg leading-relaxed">
+              <p className="text-mist text-sm md:text-lg leading-relaxed">
                 {pick(studio.hero.subDE, studio.hero.subEN)}
               </p>
             </motion.div>
@@ -130,11 +145,11 @@ function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.55, duration: 0.6 }}
-              className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-md"
+              className="mt-6 md:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-md"
             >
               <Link
                 to="/termin"
-                className="cta-shimmer inline-flex items-center justify-center gap-3 bg-pearl text-bg font-semibold px-7 py-4 text-sm tracking-widest uppercase rounded-full hover:bg-rose transition-colors"
+                className="cta-shimmer tap inline-flex items-center justify-center gap-3 bg-pearl text-bg font-semibold px-7 py-4 text-sm tracking-widest uppercase rounded-full hover:bg-rose active:bg-rose transition-colors"
               >
                 {t('Termin buchen', 'Book appointment')} <ArrowRight size={16} />
               </Link>
@@ -142,14 +157,14 @@ function Hero() {
                 href={studio.contact.whatsapp}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-7 py-4 text-sm tracking-widest uppercase font-medium border border-pearl/30 hover:border-rose hover:text-rose text-pearl rounded-full transition-colors"
+                className="tap inline-flex items-center justify-center gap-2 px-7 py-4 text-sm tracking-widest uppercase font-medium border border-pearl/30 hover:border-rose hover:text-rose active:border-rose text-pearl rounded-full transition-colors"
               >
                 <MessageCircle size={16} /> WhatsApp
               </a>
             </motion.div>
           </div>
 
-          {/* Floating accent card — pull-quote sitting on the photo side, parallaxes a bit faster than the bg */}
+          {/* Floating accent card — desktop only */}
           <motion.div
             style={{ y: accentY }}
             initial={{ opacity: 0, x: 24 }}
@@ -178,7 +193,7 @@ function Hero() {
         </div>
       </motion.div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator — desktop only (mobile uses the bottom action bar already) */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: [0, 8, 0] }}
@@ -186,7 +201,7 @@ function Hero() {
           opacity: { delay: 1.7, duration: 0.8 },
           y: { delay: 1.7, duration: 2, repeat: Infinity, ease: 'easeInOut' },
         }}
-        className="absolute bottom-8 md:bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 text-pearl/70"
+        className="hidden md:flex absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex-col items-center gap-2 text-pearl/70"
       >
         <span className="eyebrow">{t('Scrollen', 'Scroll')}</span>
         <ArrowDown size={14} />
