@@ -39,7 +39,7 @@ export default function StudioPage() {
               <Reveal kind="rise-blur" delay={1.0} duration={0.8}>
                 <p className="font-display italic text-pearl text-2xl md:text-3xl leading-snug">
                   {t(
-                    'Aura Beauty wird von Rabia Cihan in der Niederwerrner Straße in Schweinfurt geführt — Studio für Permanent Make-up, Wimpern, Brauen, Skin und Body.',
+                    'Aura Beauty wird von Rabia Cihan in der Niederwerrner Straße in Schweinfurt geführt — ein Studio für Permanent Make-up, Wimpern, Brauen, Hautpflege und Körper.',
                     'Aura Beauty is run by Rabia Cihan on Niederwerrner Straße in Schweinfurt — a studio for permanent make-up, lashes, brows, skin and body.'
                   )}
                 </p>
@@ -48,14 +48,14 @@ export default function StudioPage() {
                 <div className="space-y-5 text-mist leading-relaxed text-base md:text-lg max-w-2xl">
                   <p>
                     {t(
-                      'Jede Behandlung mit Ruhe und ehrlicher Beratung. Wenn eine Behandlung nicht zu dir passt, sagen wir es dir.',
-                      'Every treatment with a calm pace and honest consultation. If a treatment isn’t right for you, we’ll tell you.'
+                      'Jede Behandlung mit Ruhe und ehrlicher Beratung. Wenn etwas nicht zu dir passt, sagen wir es dir — auch das gehört zu unserer Arbeit.',
+                      'Every treatment with a calm pace and honest consultation. If something isn’t right for you, we’ll tell you — that’s part of our work, too.'
                     )}
                   </p>
                   <p>
                     {t(
-                      'Vor jeder Permanent-Make-up-Sitzung steht ein ruhiges Vorgespräch über Hauttyp, Form und Erwartung. Mineralische Pigmente, präzise Mikronadel, Nachpflege ist im Termin dabei.',
-                      'Every permanent make-up session starts with a calm conversation about skin type, shape and expectations. Mineral pigments, precise micro-needle work, aftercare included.'
+                      'Vor jeder Permanent-Make-up-Sitzung nehmen wir uns Zeit für ein ruhiges Vorgespräch — Hauttyp, Form, Erwartungen. Mineralische Pigmente, feine Mikronadel, Nachpflege ist im Termin enthalten.',
+                      'Every permanent make-up session starts with a calm conversation — skin type, shape, expectations. Mineral pigments, fine micro-needle, aftercare included in the appointment.'
                     )}
                   </p>
                 </div>
@@ -112,14 +112,14 @@ export default function StudioPage() {
                 <p className="eyebrow text-rose mb-4">{t('PMU Artist · Schweinfurt', 'PMU artist · Schweinfurt')}</p>
                 <p className="font-display text-2xl md:text-3xl text-pearl leading-snug mb-4">
                   {t(
-                    'Mein Studio in der Niederwerrner Straße — für Behandlungen mit Ruhe und ehrlicher Beratung.',
-                    'My studio on Niederwerrner Straße — for treatments with a calm pace and honest consultation.'
+                    'Mein Studio in der Niederwerrner Straße — wo Zeit, Ruhe und ehrliche Beratung dazugehören.',
+                    'My studio on Niederwerrner Straße — where time, calm and honest consultation are part of every appointment.'
                   )}
                 </p>
                 <p className="text-mist text-sm md:text-base leading-relaxed">
                   {t(
-                    'Ich nehme mir Zeit für ein ruhiges Vorgespräch und empfehle nur das, was zu deiner Haut passt.',
-                    'I take time for a calm conversation first, and only recommend what suits your skin.'
+                    'Ich nehme mir Zeit für ein ruhiges Vorgespräch und empfehle nur das, was wirklich zu deiner Haut passt.',
+                    'I take time for a calm conversation first, and only recommend what truly suits your skin.'
                   )}
                 </p>
               </div>
@@ -176,8 +176,8 @@ export default function StudioPage() {
                 </ul>
                 <p className="mt-6 text-xs text-fog max-w-xs leading-relaxed">
                   {t(
-                    'Termine außerhalb der Zeiten auf Anfrage. Bezahlung: Bar, Karte, Überweisung.',
-                    'Appointments outside hours on request. Payment: cash, card, bank transfer.'
+                    'Termine außerhalb dieser Zeiten gerne auf Anfrage. Bezahlung: Bar, Karte, Überweisung.',
+                    'Appointments outside these hours gladly on request. Payment: cash, card, bank transfer.'
                   )}
                 </p>
               </Reveal>

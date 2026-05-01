@@ -25,7 +25,7 @@ export default function MobileActionBar() {
           className="flex flex-col items-center justify-center gap-1 text-mist active:bg-pearl/5 active:text-pearl transition-colors"
         >
           <Phone size={20} strokeWidth={1.6} />
-          <span className="text-[10px] tracking-widest uppercase">{t('Anruf', 'Call')}</span>
+          <span className="text-[10px] tracking-widest uppercase">{t('Anrufen', 'Call')}</span>
         </a>
         <Link
           to="/termin"

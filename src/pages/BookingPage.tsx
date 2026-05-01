@@ -35,7 +35,7 @@ export default function BookingPage() {
             className="text-mist max-w-xl text-base md:text-lg leading-relaxed"
           >
             {t(
-              'Drei Wege zum Termin. Wähl was zu dir passt — Antwort meist am gleichen Tag.',
+              'Drei Wege zum Termin. Wähle, was zu dir passt — Antwort kommt meist am gleichen Tag.',
               'Three ways to book. Pick what suits you — usually a same-day reply.'
             )}
           </motion.p>
@@ -59,7 +59,7 @@ export default function BookingPage() {
                   <h3 className="font-display text-3xl md:text-4xl text-pearl mb-4 leading-tight">Planity</h3>
                   <p className="text-mist text-sm leading-relaxed mb-8 flex-1">
                     {t(
-                      'Live-Kalender, alle freien Termine sofort sichtbar. Eintragen, fertig.',
+                      'Live-Kalender mit allen freien Terminen. Eintragen, fertig.',
                       'Live calendar with all open slots. Pick a time, done.'
                     )}
                   </p>
@@ -83,8 +83,8 @@ export default function BookingPage() {
                   <h3 className="font-display text-3xl md:text-4xl text-pearl mb-4 leading-tight">WhatsApp</h3>
                   <p className="text-mist text-sm leading-relaxed mb-8 flex-1">
                     {t(
-                      'Kurz schreiben, was du machen lassen willst — Antwort meist am gleichen Tag.',
-                      'Send a short message about what you want — usually replied to the same day.'
+                      'Schreib uns kurz, was du dir wünschst — Antwort kommt meist am gleichen Tag.',
+                      'Send a short message about what you have in mind — usually replied the same day.'
                     )}
                   </p>
                   <span className="inline-flex items-center gap-2 text-sm tracking-widest uppercase text-rose">
@@ -205,8 +205,8 @@ export default function BookingPage() {
               </ul>
               <p className="mt-6 text-xs text-fog max-w-xs leading-relaxed">
                 {t(
-                  'Anzahlung nur bei besonders langen Behandlungen, sonst nicht.',
-                  'Deposit only for especially long treatments, otherwise none.'
+                  'Eine Anzahlung wird nur bei besonders langen Behandlungen fällig — sonst nicht.',
+                  'A deposit is only required for especially long treatments — otherwise none.'
                 )}
               </p>
             </Reveal>

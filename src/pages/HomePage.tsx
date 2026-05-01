@@ -300,9 +300,9 @@ function ServiceConstellation() {
             <p className="eyebrow text-fog mb-4">{t('Leistungen', 'Services')}</p>
             <Reveal kind="rise-blur" scroll>
               <h2 className="display-mega text-5xl md:text-6xl lg:text-7xl">
-                {t('Fünf', 'Five')} <span className="display-italic text-rose">{t('Auras.', 'auras.')}</span>
+                {t('Fünf', 'Five')} <span className="display-italic text-rose">{t('Auren.', 'auras.')}</span>
                 <br />
-                {t('Eine Adresse.', 'One address.')}
+                {t('Ein Studio.', 'One studio.')}
               </h2>
             </Reveal>
           </div>
@@ -310,8 +310,8 @@ function ServiceConstellation() {
             <Reveal kind="rise" scroll delay={0.1}>
               <p className="text-mist leading-relaxed text-base md:text-lg">
                 {t(
-                  'Permanent Make-up, Wimpern, Brauen, Skin und Body. Jede Behandlung mit eigener Handschrift — eigener Beratungsstil, eigener Pflegerhythmus. Wähl deine Aura.',
-                  'Permanent make-up, lashes, brows, skin and body. Each treatment with its own handwriting — its own consultation style, its own aftercare rhythm. Pick your aura.'
+                  'Permanent Make-up, Wimpern, Brauen, Hautpflege und Körper. Jede Behandlung mit eigener Handschrift — eigene Beratung, eigener Pflegeablauf. Wähle deine Aura.',
+                  'Permanent make-up, lashes, brows, skin and body. Each treatment with its own signature — its own consultation, its own aftercare rhythm. Pick your aura.'
                 )}
               </p>
             </Reveal>
@@ -488,7 +488,7 @@ function ProofStrip() {
               </div>
               <p className="text-mist leading-relaxed text-base md:text-lg max-w-md mb-8">
                 {t(
-                  `${studio.social.reviewCount} verifizierte Bewertungen auf ${studio.social.reviewSource}. Keine Fake-Stimmen, keine erkauften Sternchen — echte Gäste, die wiederkommen.`,
+                  `${studio.social.reviewCount} verifizierte Bewertungen auf ${studio.social.reviewSource}. Keine Fake-Stimmen, keine erkauften Sterne — echte Gäste, die wiederkommen.`,
                   `${studio.social.reviewCount} verified reviews on ${studio.social.reviewSource}. No fake voices, no bought stars — real guests who come back.`
                 )}
               </p>
@@ -553,8 +553,8 @@ function FinalCTA() {
         <Reveal kind="rise" scroll delay={0.15}>
           <p className="max-w-md mx-auto text-mist text-sm md:text-base leading-relaxed mb-10">
             {t(
-              'Online über Planity, per WhatsApp oder telefonisch. Erstberatung kostenlos und unverbindlich. Antwort meist am gleichen Tag.',
-              'Online via Planity, by WhatsApp or phone. First consultation is free and no-obligation. Usually a same-day reply.'
+              'Online über Planity, per WhatsApp oder telefonisch. Die Erstberatung ist kostenlos und unverbindlich — Antwort kommt meist am gleichen Tag.',
+              'Online via Planity, by WhatsApp or phone. The first consultation is free and no-obligation — usually a same-day reply.'
             )}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-md mx-auto">

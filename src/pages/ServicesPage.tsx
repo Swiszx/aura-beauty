@@ -41,7 +41,7 @@ export default function ServicesPage() {
           <h1 className="display-mega text-6xl sm:text-7xl md:text-9xl lg:text-[10rem] leading-[0.95] mb-8" translate="no">
             <RevealText text={t('Fünf', 'Five')} by="letter" delay={0.2} stagger={0.05} duration={0.85} className="inline-block" />
             <span>&nbsp;</span>
-            <RevealText text={t('Auras.', 'auras.')} by="letter" delay={0.45} stagger={0.05} duration={0.85} className="display-italic text-rose inline-block" />
+            <RevealText text={t('Auren.', 'auras.')} by="letter" delay={0.45} stagger={0.05} duration={0.85} className="display-italic text-rose inline-block" />
           </h1>
           <motion.p
             initial={{ opacity: 0, y: 12 }}
@@ -50,8 +50,8 @@ export default function ServicesPage() {
             className="text-mist max-w-2xl text-base md:text-lg leading-relaxed"
           >
             {t(
-              'Permanent Make-up, Wimpern, Brauen, Skin und Body. Jede Behandlung mit Beratung, Pflegeplan und ehrlicher Einschätzung — keine Behandlung ohne Vorgespräch.',
-              'Permanent make-up, lashes, brows, skin and body. Every treatment includes consultation, an aftercare plan and an honest assessment — no treatment without a conversation first.'
+              'Permanent Make-up, Wimpern, Brauen, Hautpflege und Körper. Jede Behandlung beginnt mit einem Vorgespräch — mit ehrlicher Einschätzung und einem Pflegeplan, der zu deiner Haut passt.',
+              'Permanent make-up, lashes, brows, skin and body. Every treatment starts with a conversation — an honest assessment and an aftercare plan tailored to your skin.'
             )}
           </motion.p>
 
@@ -91,7 +91,7 @@ export default function ServicesPage() {
           <Reveal kind="rise" scroll delay={0.1}>
             <p className="text-mist max-w-md mx-auto mb-10 leading-relaxed">
               {t(
-                'Schreib einfach kurz auf WhatsApp, was du im Kopf hast. Wir antworten mit Empfehlung — kein Verkaufsgespräch.',
+                'Schreib uns kurz auf WhatsApp, was du im Kopf hast. Wir antworten mit einer Empfehlung — kein Verkaufsgespräch.',
                 'Just send a short WhatsApp with what you have in mind. We reply with a recommendation — no sales pitch.'
               )}
             </p>
