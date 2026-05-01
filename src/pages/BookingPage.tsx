@@ -128,22 +128,33 @@ export default function BookingPage() {
             </h2>
           </Reveal>
           <div className="space-y-3">
-            {services.map((s, i) => (
-              <Reveal key={s.id} kind="rise" scroll delay={i * 0.05}>
-                <div className="flex items-baseline justify-between gap-4 py-5 border-b hairline group">
-                  <div>
-                    <p className="eyebrow text-fog mb-1">{pick(s.eyebrowDE, s.eyebrowEN)}</p>
-                    <p className="font-display text-xl md:text-2xl text-pearl group-hover:text-rose transition-colors">
-                      {pick(s.titleDE, s.titleEN)}{' '}
-                      <span className="display-italic">{pick(s.italicDE, s.italicEN)}</span>
-                    </p>
-                  </div>
-                  <span className="font-mono text-xs text-fog whitespace-nowrap">
-                    {t('ab', 'from')} {Math.min(...s.treatments.map(t => Array.isArray(t.price) ? t.price[0] : t.price))} €
-                  </span>
-                </div>
-              </Reveal>
-            ))}
+            {services.map((s, i) => {
+              const allTreatments = [
+                ...s.treatments,
+                ...(s.groups?.flatMap(g => g.treatments) ?? []),
+              ];
+              const paidPrices = allTreatments
+                .map(tr => tr.price)
+                .filter((p): p is number | [number, number] => p !== 'free')
+                .map(p => Array.isArray(p) ? p[0] : p);
+              const minPrice = paidPrices.length ? Math.min(...paidPrices) : 0;
+              return (
+                <Reveal key={s.id} kind="rise" scroll delay={i * 0.05}>
+                  <Link to={`/leistungen#${s.id}`} className="flex items-baseline justify-between gap-4 py-5 border-b hairline group">
+                    <div>
+                      <p className="eyebrow text-fog mb-1">{pick(s.eyebrowDE, s.eyebrowEN)}</p>
+                      <p className="font-display text-xl md:text-2xl text-pearl group-hover:text-rose transition-colors">
+                        {pick(s.titleDE, s.titleEN)}{' '}
+                        <span className="display-italic">{pick(s.italicDE, s.italicEN)}</span>
+                      </p>
+                    </div>
+                    <span className="font-mono text-xs text-fog whitespace-nowrap">
+                      {t('ab', 'from')} {minPrice} €
+                    </span>
+                  </Link>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>

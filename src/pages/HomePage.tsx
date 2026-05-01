@@ -293,11 +293,17 @@ function PriceSnapshot() {
                 <p className="font-display text-pearl text-base md:text-lg mb-6 leading-tight">
                   {pick(p.labelDE, p.labelEN)}
                 </p>
-                <p className="font-display text-3xl md:text-4xl text-pearl mt-auto">
-                  {p.from && <span className="text-mist text-base mr-1">{t('ab', 'from')}</span>}
-                  {p.price}
-                  <span className="text-rose text-base ml-1">€</span>
-                </p>
+                {'free' in p && p.free ? (
+                  <p className="font-display italic text-2xl md:text-3xl text-rose mt-auto">
+                    {t('kostenlos', 'free')}
+                  </p>
+                ) : (
+                  <p className="font-display text-3xl md:text-4xl text-pearl mt-auto">
+                    {'from' in p && p.from && <span className="text-mist text-base mr-1">{t('ab', 'from')}</span>}
+                    {p.price}
+                    <span className="text-rose text-base ml-1">€</span>
+                  </p>
+                )}
               </div>
             </Reveal>
           ))}

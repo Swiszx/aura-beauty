@@ -1,8 +1,6 @@
-// All facts verified against:
-// - @aurabeauty.sw Instagram
-// - Aura Beauty Schweinfurt profile on Planity (5.0 stars / 13 reviews)
-// - Fresha listing
-// - Public Facebook page
+// All facts verified against the Planity profile of Aura Beauty Schweinfurt:
+// https://www.planity.com/de-DE/aura-beauty-schweinfurt-97421
+// Plus @aurabeauty.sw IG and the Facebook page.
 //
 // Bilingual DE/EN — Schweinfurt's beauty market includes German locals,
 // Turkish-speaking community and English-speaking US Garrison families.
@@ -11,8 +9,8 @@ export const studio = {
   name: "Aura Beauty",
   fullName: "Aura Beauty Schweinfurt",
   shortName: "Aura",
-  taglineDE: "Permanent Make-up · Wimpern · Brauen · Skin",
-  taglineEN: "Permanent Make-up · Lashes · Brows · Skin",
+  taglineDE: "Permanent Make-up · Wimpern · Brauen · Skin · Body",
+  taglineEN: "Permanent Make-up · Lashes · Brows · Skin · Body",
   city: "Schweinfurt",
   postalCode: "97421",
   country: "Deutschland",
@@ -32,8 +30,8 @@ export const studio = {
     eyebrowEN: "Studio · Schweinfurt",
     headlineDE: "Eine Aura,\ndie zu dir\ngehört.",
     headlineEN: "An aura\nthat belongs\nto you.",
-    subDE: "Permanent Make-up, Wimpern, Brauen und Skin — handgemacht im Studio in der Niederwerrner Straße. Kein One-size-fits-all. Erst die Beratung, dann die Linie.",
-    subEN: "Permanent make-up, lashes, brows and skin — done by hand at the studio on Niederwerrner Straße. No one-size-fits-all. Consultation first, then the line.",
+    subDE: "Permanent Make-up, Wimpern, Brauen, Skin und Body — handgemacht im Studio in der Niederwerrner Straße. Über 40 Behandlungen. Beratungsgespräch jederzeit kostenlos.",
+    subEN: "Permanent make-up, lashes, brows, skin and body — done by hand at the studio on Niederwerrner Straße. Over 40 treatments. Consultation always free.",
   },
   contact: {
     phone: "+49 173 5236401",
@@ -70,7 +68,7 @@ export interface Treatment {
   nameDE: string;
   nameEN: string;
   duration?: string;
-  price: number | [number, number];
+  price: number | [number, number] | 'free';
   noteDE?: string;
   noteEN?: string;
 }
@@ -91,6 +89,8 @@ export interface ServiceFamily {
   accent: string;
   ritualDE: string[];
   ritualEN: string[];
+  /** Optional sub-groups inside a family — used for long lists like Body & Beyond. */
+  groups?: { titleDE: string; titleEN: string; treatments: Treatment[] }[];
   treatments: Treatment[];
   aftercareDE?: string;
   aftercareEN?: string;
@@ -103,43 +103,39 @@ export const services: ServiceFamily[] = [
     id: 'pmu',
     eyebrowDE: '01 — Permanent Make-up',
     eyebrowEN: '01 — Permanent Make-up',
-    titleDE: 'Brauen, Lidstrich,',
-    titleEN: 'Brows, eyeliner,',
-    italicDE: 'Lippen.',
-    italicEN: 'lips.',
+    titleDE: 'Brauen, Wimpernkranz,',
+    titleEN: 'Brows, lash line,',
+    italicDE: 'Babyliner.',
+    italicEN: 'baby liner.',
     taglineDE: 'Pigmente, hand-präzise gesetzt. Hält Jahre, sieht aus wie Make-up am Morgen.',
     taglineEN: 'Pigments, hand-placed. Lasts years, reads like fresh morning make-up.',
-    descriptionDE: 'Permanent Make-up ist Pigmenttechnik, kein Tattoo. Mit feinster Nadel werden mineralische Pigmente in die obere Hautschicht gesetzt — natürlich, weich, individuell auf deinen Hauttyp und Look abgestimmt. Das Ergebnis hält 1–3 Jahre und verblasst sanft.',
-    descriptionEN: 'Permanent make-up is pigment technique, not a tattoo. With the finest needle, mineral pigments are placed into the upper skin layer — natural, soft, tuned to your skin type and look. Results last 1–3 years and fade gently.',
+    descriptionDE: 'Permanent Make-up ist Pigmenttechnik, kein Tattoo. Mit feinster Nadel werden mineralische Pigmente in die obere Hautschicht gesetzt — natürlich, weich, individuell auf deinen Hauttyp und Look abgestimmt. Jede Behandlung beinhaltet eine Nachbehandlung nach 4 Wochen.',
+    descriptionEN: 'Permanent make-up is pigment technique, not a tattoo. With the finest needle, mineral pigments are placed into the upper skin layer — natural, soft, tuned to your skin type and look. Every treatment includes a touch-up at 4 weeks.',
     auraClass: 'aura-pmu',
     accent: 'copper',
     ritualDE: [
-      'Beratung — Form, Farbe, Erwartung',
+      'Kostenlose Erstberatung — Form, Farbe, Erwartung',
       'Vorzeichnung & Freigabe',
-      'Pigmentierung in 2 Sessions',
-      'Nachpflege & Termin nach 4 Wochen',
+      'Pigmentierung (Erstsitzung)',
+      'Nachbehandlung nach 4 Wochen',
     ],
     ritualEN: [
-      'Consultation — shape, colour, expectation',
+      'Free first consultation — shape, colour, expectation',
       'Pre-drawing & approval',
-      'Pigmentation across 2 sessions',
-      'Aftercare & follow-up at 4 weeks',
+      'Pigmentation (first session)',
+      'Touch-up at 4 weeks',
     ],
     treatments: [
-      {
-        nameDE: 'Powderbrows', nameEN: 'Powder brows', duration: '2,5 Std.', price: 319,
-        noteDE: 'Inkl. Erstsitzung & Nachbehandlung', noteEN: 'Includes first session & touch-up',
-      },
-      {
-        nameDE: 'Lash Line Enhancement', nameEN: 'Lash line enhancement', duration: '1,5 Std.', price: 249,
-        noteDE: 'Subtiler Lidstrich zwischen den Wimpern', noteEN: 'Subtle line between the lashes',
-      },
-      {
-        nameDE: 'Lidstrich (Eyeliner)', nameEN: 'Eyeliner', duration: '2 Std.', price: 289,
-      },
+      { nameDE: 'Powderbrows', nameEN: 'Powder brows', duration: '2 Std. 30 Min.', price: 319 },
+      { nameDE: 'Nachbehandlung Powderbrows', nameEN: 'Powder brows touch-up', duration: '1 Std.', price: 69 },
+      { nameDE: 'Wimpernkranzverdichtung', nameEN: 'Lash line enhancement', duration: '2 Std.', price: 249 },
+      { nameDE: 'Nachbehandlung Wimpernkranzverdichtung', nameEN: 'Lash line touch-up', duration: '1 Std.', price: 59 },
+      { nameDE: 'Wimpernkranzverdichtung mit Babyliner', nameEN: 'Lash line with baby liner', duration: '2 Std.', price: 289 },
+      { nameDE: 'Pigmententfernung (BB Remover)', nameEN: 'Pigment removal (BB remover)', duration: '1 Std.', price: 99 },
+      { nameDE: 'Beratungsgespräch PMU', nameEN: 'PMU consultation', duration: '15 Min.', price: 'free', noteDE: 'Unverbindlich, jederzeit', noteEN: 'No commitment, any time' },
     ],
-    aftercareDE: 'Erste 7 Tage: Sonne, Sauna und Make-up auf der Stelle vermeiden. Pflegecreme nach Plan. Termin zur Nachpflege nach 4 Wochen.',
-    aftercareEN: 'First 7 days: avoid sun, sauna and make-up on the area. Care cream per plan. Touch-up appointment at 4 weeks.',
+    aftercareDE: 'Erste 7 Tage: Sonne, Sauna und Make-up auf der Stelle vermeiden. Pflegecreme nach Plan. Termin zur Nachpflege nach 4 Wochen ist im Preis enthalten.',
+    aftercareEN: 'First 7 days: avoid sun, sauna and make-up on the area. Care cream per plan. The 4-week touch-up is included in the price.',
     shortLabelDE: 'PMU',
     shortLabelEN: 'PMU',
   },
@@ -147,33 +143,53 @@ export const services: ServiceFamily[] = [
     id: 'lashes',
     eyebrowDE: '02 — Wimpern',
     eyebrowEN: '02 — Lashes',
-    titleDE: 'Verlängerung,',
-    titleEN: 'Extensions,',
+    titleDE: 'Classic, Volumen,',
+    titleEN: 'Classic, volume,',
     italicDE: 'Lifting.',
     italicEN: 'lifting.',
-    taglineDE: 'Mehr Länge, mehr Volumen — oder einfach die eigenen, deutlich sichtbar.',
-    taglineEN: 'More length, more volume — or simply your own, clearly visible.',
-    descriptionDE: 'Synthetische Einzelwimpern in 1:1-Technik oder Volumen-Fans, einzeln auf deine Naturwimper geklebt. Hält 4–6 Wochen mit Refill. Lash-Lifting hebt deine eigenen Wimpern für 6–8 Wochen — ohne Kleber, ohne Refill.',
-    descriptionEN: 'Synthetic single lashes in 1:1 or volume fans, attached one by one to your natural lash. Lasts 4–6 weeks with refill. Lash lifting raises your own lashes for 6–8 weeks — no glue, no refill.',
+    taglineDE: 'Drei Wimpern-Techniken — von dezent bis dramatisch — plus klassisches Lifting ohne Kleber.',
+    taglineEN: 'Three lash techniques — from subtle to dramatic — plus a classic lift without glue.',
+    descriptionDE: 'Klassische 1:1-Verlängerung für natürliche Länge, Soft Volumen für mehr Tiefe, Deluxe Volumen für maximalen Effekt. Jede Wimper einzeln auf deine Naturwimper geklebt. Lasting 4–6 Wochen mit Refill. Lash-Lifting hebt deine eigenen Wimpern für 6–8 Wochen — kein Kleber, kein Refill.',
+    descriptionEN: 'Classic 1:1 extensions for natural length, soft volume for more depth, deluxe volume for maximum effect. Each lash glued individually to your natural lash. Lasts 4–6 weeks with refill. Lash lifting raises your own lashes for 6–8 weeks — no glue, no refill.',
     auraClass: 'aura-lashes',
     accent: 'violet',
     ritualDE: [
-      'Stilberatung — natürlich, klassisch oder dramatisch',
+      'Stilberatung — Classic, Volumen oder Lift',
       'Mapping auf deine Augenform',
       'Auftrag mit medizinischem Kleber',
       'Refill-Termin in 3–4 Wochen',
     ],
     ritualEN: [
-      'Style consultation — natural, classic or dramatic',
+      'Style consultation — classic, volume or lift',
       'Mapping to your eye shape',
       'Application with medical-grade adhesive',
       'Refill appointment in 3–4 weeks',
     ],
-    treatments: [
-      { nameDE: 'Wimpernverlängerung — Neuauftrag', nameEN: 'Lash extensions — full set', duration: '2 Std.', price: [119, 149] },
-      { nameDE: 'Wimpern-Refill (3 Wochen)', nameEN: 'Lash refill (3 weeks)', duration: '1 Std.', price: 65 },
-      { nameDE: 'Wimpern-Lifting & Färbung', nameEN: 'Lash lift & tint', duration: '1 Std.', price: 75 },
+    groups: [
+      {
+        titleDE: 'Wimpernverlängerung',
+        titleEN: 'Lash extensions',
+        treatments: [
+          { nameDE: 'Natural Classic 1:1 — Neumodel', nameEN: 'Natural Classic 1:1 — full set', duration: '2 Std.', price: 119 },
+          { nameDE: 'Auffüllen Natural Classic', nameEN: 'Refill — Natural Classic', duration: '1 Std.', price: 60 },
+          { nameDE: 'Soft Volumen — Neumodel', nameEN: 'Soft Volume — full set', duration: '2 Std.', price: 129 },
+          { nameDE: 'Auffüllen Soft Volumen', nameEN: 'Refill — Soft Volume', duration: '1 Std.', price: 65 },
+          { nameDE: 'Deluxe Volumen — Neumodel', nameEN: 'Deluxe Volume — full set', duration: '2 Std.', price: 149 },
+        ],
+      },
+      {
+        titleDE: 'Lash & Browlifting',
+        titleEN: 'Lash & brow lifting',
+        treatments: [
+          { nameDE: 'Lashlifting inkl. Färben & Keratinpflege', nameEN: 'Lash lifting incl. tint & keratin', duration: '50 Min.', price: 69 },
+          { nameDE: 'Korean Lashlifting', nameEN: 'Korean lash lifting', duration: '50 Min.', price: 69 },
+          { nameDE: 'Browlifting mit Keratinpflege', nameEN: 'Brow lifting with keratin', duration: '50 Min.', price: 69 },
+          { nameDE: 'Kombi: Lash & Browlifting', nameEN: 'Combo: lash & brow lifting', duration: '1 Std. 20 Min.', price: 99 },
+          { nameDE: 'Browlifting & Hybrid Brows', nameEN: 'Brow lifting + hybrid brows', duration: '1 Std. 5 Min.', price: 89 },
+        ],
+      },
     ],
+    treatments: [],
     aftercareDE: 'Erste 24 Std. Wasser meiden. Keine Wimperntusche auf Ölbasis, kein Reiben. Refill alle 3–4 Wochen für gleichbleibendes Volumen.',
     aftercareEN: 'First 24 hours: avoid water. No oil-based mascara, no rubbing. Refill every 3–4 weeks for consistent volume.',
     shortLabelDE: 'Wimpern',
@@ -183,33 +199,51 @@ export const services: ServiceFamily[] = [
     id: 'brows',
     eyebrowDE: '03 — Brauen',
     eyebrowEN: '03 — Brows',
-    titleDE: 'Lifting, Threading,',
-    titleEN: 'Lifting, threading,',
-    italicDE: 'Hybrid.',
-    italicEN: 'hybrid.',
+    titleDE: 'Threading, Hybrid,',
+    titleEN: 'Threading, hybrid,',
+    italicDE: 'Lifting.',
+    italicEN: 'lifting.',
     taglineDE: 'Form, Farbe, Richtung — die Brauen, die dein Gesicht sortieren.',
     taglineEN: 'Shape, colour, direction — the brows that bring your face into focus.',
-    descriptionDE: 'Brow-Lifting setzt deine Brauenhaare in eine gestreckte, aufgerichtete Form für 6–8 Wochen. Threading entfernt Härchen exakt an der richtigen Stelle. Hybrid Brows kombinieren Färbung und Henna für definierte Form ohne Permanent-Pigment.',
-    descriptionEN: 'Brow lifting sets your brow hairs in a lifted, defined position for 6–8 weeks. Threading removes hairs exactly where needed. Hybrid brows combine tint and henna for a defined shape without permanent pigment.',
+    descriptionDE: 'Klassisches orientalisches Faden-Threading entfernt Härchen exakt an der richtigen Stelle. Hybrid Brows kombinieren Färbung und Henna für definierte Form ohne Permanent-Pigment. Browlifting setzt deine Brauenhaare in eine gestreckte Form für 6–8 Wochen.',
+    descriptionEN: 'Classic oriental thread threading removes hairs exactly where needed. Hybrid brows combine tint and henna for a defined shape without permanent pigment. Brow lifting sets your brow hairs in a lifted, defined position for 6–8 weeks.',
     auraClass: 'aura-brows',
     accent: 'gold',
     ritualDE: [
       'Vermessung & goldener Schnitt',
       'Form festlegen',
-      'Lift, Threading oder Henna',
+      'Threading, Henna oder Lift',
       'Tönung passend zum Haupthaar',
     ],
     ritualEN: [
       'Measure & golden ratio',
       'Define the shape',
-      'Lift, threading or henna',
+      'Threading, henna or lift',
       'Tint to match your hair',
     ],
-    treatments: [
-      { nameDE: 'Brow-Lifting', nameEN: 'Brow lifting', duration: '45 Min.', price: 49 },
-      { nameDE: 'Augenbrauen-Threading', nameEN: 'Brow threading', duration: '15 Min.', price: 12 },
-      { nameDE: 'Hybrid Brows (Henna + Färbung)', nameEN: 'Hybrid brows (henna + tint)', duration: '45 Min.', price: 39 },
+    groups: [
+      {
+        titleDE: 'Threading (Faden zupfen)',
+        titleEN: 'Threading',
+        treatments: [
+          { nameDE: 'Augenbrauen zupfen & formen', nameEN: 'Brows — full shape', duration: '20 Min.', price: 20 },
+          { nameDE: 'Augenbrauen — nur Außenrum', nameEN: 'Brows — outline only', duration: '15 Min.', price: 12 },
+          { nameDE: 'Damenbart', nameEN: 'Upper lip thread', duration: '5 Min.', price: 8 },
+          { nameDE: 'Kinn', nameEN: 'Chin', duration: '10 Min.', price: 8 },
+          { nameDE: 'Hals', nameEN: 'Neck', duration: '15 Min.', price: 10 },
+        ],
+      },
+      {
+        titleDE: 'Hybrid Brows & Lifting',
+        titleEN: 'Hybrid brows & lifting',
+        treatments: [
+          { nameDE: 'Hybrid Brows (Henna + Färbung)', nameEN: 'Hybrid brows (henna + tint)', duration: '45 Min.', price: 39 },
+          { nameDE: 'Browlifting & Hybrid Kombi', nameEN: 'Brow lifting + hybrid combo', duration: '1 Std.', price: 89 },
+          { nameDE: 'Browlifting mit Keratinpflege', nameEN: 'Brow lifting with keratin', duration: '50 Min.', price: 69 },
+        ],
+      },
     ],
+    treatments: [],
     shortLabelDE: 'Brauen',
     shortLabelEN: 'Brows',
   },
@@ -217,36 +251,57 @@ export const services: ServiceFamily[] = [
     id: 'skin',
     eyebrowDE: '04 — Skin',
     eyebrowEN: '04 — Skin',
-    titleDE: 'Aquafacial,',
-    titleEN: 'Aquafacial,',
-    italicDE: 'Microneedling.',
-    italicEN: 'microneedling.',
-    taglineDE: 'Tiefenreinigung mit Druckwasser. Kontrollierte Hauterneuerung.',
-    taglineEN: 'Deep cleanse with pressurised water. Controlled skin renewal.',
-    descriptionDE: 'Aquafacial reinigt die Haut mit Vakuum und Wirkstoff-Spüllösung — sanft, aber tief. Microneedling setzt mikroskopisch feine Kanäle, durch die Wirkstoffe einziehen und neue Kollagenbildung anregt. Nach 3–5 Sitzungen sichtbar feinporiger und straffer.',
-    descriptionEN: 'Aquafacial cleanses the skin with vacuum and active rinsing solution — gentle but deep. Microneedling creates microscopic channels through which actives sink in and new collagen is triggered. Visibly tighter and finer-pored after 3–5 sessions.',
+    titleDE: 'Aquafacial, Microneedling,',
+    titleEN: 'Aquafacial, microneedling,',
+    italicDE: 'Aquarücken.',
+    italicEN: 'aqua back.',
+    taglineDE: 'Tiefenreinigung mit Druckwasser, kontrollierte Hauterneuerung — mit Lichttherapie.',
+    taglineEN: 'Deep cleanse with pressurised water, controlled skin renewal — with light therapy.',
+    descriptionDE: 'Aquafacial reinigt die Haut mit Vakuum und Wirkstoff-Spüllösung — sanft, aber tief, mit integrierter Lichttherapie. Drei Stufen je nach Hautziel. Microneedling regt die Kollagenbildung an, sichtbar nach 3–5 Sitzungen. Auch für den Rücken: Aquarücken-Tiefenreinigung gegen Pickel und unreine Haut auf Schultern und Rücken.',
+    descriptionEN: 'Aquafacial cleanses the skin with vacuum and active rinse — gentle but deep, with integrated light therapy. Three levels depending on skin goal. Microneedling triggers collagen, visible after 3–5 sessions. Also for the back: Aqua-back deep cleanse against breakouts on shoulders and back.',
     auraClass: 'aura-skin',
     accent: 'rose',
     ritualDE: [
-      'Hautanalyse',
+      'Kostenlose Hautanalyse',
       'Reinigung & Vorbereitung',
       'Behandlung in 4–6 Schritten',
       'Wirkstoff-Maske & Pflegeplan',
     ],
     ritualEN: [
-      'Skin analysis',
+      'Free skin analysis',
       'Cleanse & prep',
       'Treatment in 4–6 steps',
       'Active mask & home routine',
     ],
-    treatments: [
-      { nameDE: 'Aquafacial', nameEN: 'Aquafacial', duration: '45 Min.', price: 89 },
-      { nameDE: 'Microneedling', nameEN: 'Microneedling', duration: '60 Min.', price: 95 },
+    groups: [
       {
-        nameDE: 'Pigmentflecken-Entfernung', nameEN: 'Pigment-spot removal', price: [69, 159],
-        noteDE: 'Pro Sitzung, je nach Größe', noteEN: 'Per session, depending on size',
+        titleDE: 'Gesicht',
+        titleEN: 'Face',
+        treatments: [
+          { nameDE: 'Aquafacial — Light Edition', nameEN: 'Aquafacial — light edition', duration: '45 Min.', price: 89, noteDE: 'Inkl. Lichttherapie', noteEN: 'Incl. light therapy' },
+          { nameDE: 'Aquafacial — Standard', nameEN: 'Aquafacial — standard', duration: '1 Std.', price: 99, noteDE: 'Inkl. Lichttherapie', noteEN: 'Incl. light therapy' },
+          { nameDE: 'Aquafacial — Deluxe', nameEN: 'Aquafacial — deluxe', duration: '1 Std. 30 Min.', price: 129, noteDE: 'Inkl. Lichttherapie', noteEN: 'Incl. light therapy' },
+          { nameDE: 'Microneedling inkl. Lichttherapie', nameEN: 'Microneedling incl. light therapy', duration: '1 Std.', price: 95 },
+          { nameDE: 'Extra Wirkstoff-Ampulle', nameEN: 'Extra active ampule', duration: '10 Min.', price: 7 },
+        ],
+      },
+      {
+        titleDE: 'Rücken',
+        titleEN: 'Back',
+        treatments: [
+          { nameDE: 'Aquarücken Tiefenreinigung', nameEN: 'Aqua-back deep cleanse', duration: '50 Min.', price: 47 },
+          { nameDE: 'Extra Ampulle (Rücken)', nameEN: 'Extra ampule (back)', duration: '10 Min.', price: 14 },
+        ],
+      },
+      {
+        titleDE: 'Beratung',
+        titleEN: 'Consultation',
+        treatments: [
+          { nameDE: 'Hautanalyse & Beratung', nameEN: 'Skin analysis & consultation', duration: '15 Min.', price: 'free' },
+        ],
       },
     ],
+    treatments: [],
     aftercareDE: 'Nach Microneedling: 24 Std. ohne Make-up, 48 Std. ohne Sonne. Hochwertige Pflegecreme nach Plan, mindestens LSF 30 vor jedem Spaziergang.',
     aftercareEN: 'After microneedling: 24 hrs no make-up, 48 hrs no sun. Quality moisturiser per plan, at least SPF 30 before any time outdoors.',
     shortLabelDE: 'Skin',
@@ -256,52 +311,81 @@ export const services: ServiceFamily[] = [
     id: 'body',
     eyebrowDE: '05 — Body & Beyond',
     eyebrowEN: '05 — Body & Beyond',
-    titleDE: 'Waxing, G8,',
-    titleEN: 'Waxing, G8,',
+    titleDE: 'G8, Waxing,',
+    titleEN: 'G8, waxing,',
     italicDE: 'Fußpflege.',
     italicEN: 'foot care.',
     taglineDE: 'Glätten, formen, pflegen — Körperbehandlungen mit ruhiger Hand.',
     taglineEN: 'Smooth, shape, restore — body work with a calm hand.',
-    descriptionDE: 'Waxing in allen Zonen — sanft, hygienisch, individuell. G8 Anti-Cellulite-Massage mit kontrollierter Vakuum-Saugmechanik gegen Orangenhaut. Klassische Fußpflege für gesunde, wohlgepflegte Füße.',
-    descriptionEN: 'Waxing in every zone — gentle, hygienic, individual. G8 anti-cellulite massage with controlled vacuum suction against orange-peel skin. Classic pedicure for healthy, cared-for feet.',
+    descriptionDE: 'G8 Anti-Cellulite mit kontrollierter Vakuum-Saugmechanik — gezielt nach Körperzone. Waxing mit hochwertigem Wachs in jeder Zone des Gesichts. Klassische Fußpflege für gesunde, wohlgepflegte Füße. Beratung für G8 Bodyforming jederzeit kostenlos.',
+    descriptionEN: 'G8 anti-cellulite with controlled vacuum suction — targeted by body zone. Waxing with high-quality wax in every area of the face. Classic pedicure for healthy, cared-for feet. Free body forming consultation any time.',
     auraClass: 'aura-body',
     accent: 'pearl-glow',
     ritualDE: [
-      'Körperberatung',
-      'Vorbereitung & Pflege',
+      'Beratung & Zielfestlegung',
+      'Vorbereitung der Zone',
       'Behandlung mit Pausen',
       'Beruhigung & Pflege-Empfehlung',
     ],
     ritualEN: [
-      'Body consultation',
-      'Prep & care',
+      'Consultation & goal setting',
+      'Zone preparation',
       'Treatment with rests',
       'Calm-down & home care',
     ],
-    treatments: [
-      { nameDE: 'Waxing — Bein komplett', nameEN: 'Waxing — full leg', duration: '45 Min.', price: 49 },
-      { nameDE: 'Waxing — Brazilian', nameEN: 'Waxing — Brazilian', duration: '30 Min.', price: 39 },
-      { nameDE: 'G8 Anti-Cellulite-Massage', nameEN: 'G8 anti-cellulite massage', duration: '45 Min.', price: [69, 89] },
-      { nameDE: 'Klassische Fußpflege', nameEN: 'Classic pedicure', duration: '60 Min.', price: 49 },
+    groups: [
+      {
+        titleDE: 'G8 Anti-Cellulite & HOT Vakuum',
+        titleEN: 'G8 anti-cellulite & HOT vacuum',
+        treatments: [
+          { nameDE: 'G8 Massage — Bauch', nameEN: 'G8 — abdomen', duration: '25 Min.', price: 29 },
+          { nameDE: 'G8 Massage — Po', nameEN: 'G8 — glutes', duration: '20 Min.', price: 29 },
+          { nameDE: 'G8 Massage — Oberarme', nameEN: 'G8 — upper arms', duration: '20 Min.', price: 29 },
+          { nameDE: 'G8 Massage — Oberschenkel vorne & hinten', nameEN: 'G8 — thighs front & back', duration: '35 Min.', price: 39 },
+          { nameDE: 'G8 — Oberschenkel + Innenschenkel', nameEN: 'G8 — thighs incl. inner', duration: '35 Min.', price: 49 },
+          { nameDE: 'Beratungsgespräch G8 Bodyforming', nameEN: 'G8 body forming consultation', duration: '15 Min.', price: 'free' },
+        ],
+      },
+      {
+        titleDE: 'Waxing (Gesicht)',
+        titleEN: 'Waxing (face)',
+        treatments: [
+          { nameDE: 'Augenbrauen', nameEN: 'Brows', duration: '10 Min.', price: 10 },
+          { nameDE: 'Oberlippe', nameEN: 'Upper lip', duration: '5 Min.', price: 10 },
+          { nameDE: 'Kinn', nameEN: 'Chin', duration: '5 Min.', price: 10 },
+          { nameDE: 'Nase', nameEN: 'Nose', duration: '5 Min.', price: 8 },
+          { nameDE: 'Achseln', nameEN: 'Underarms', duration: '15 Min.', price: 20 },
+        ],
+      },
+      {
+        titleDE: 'Fußpflege',
+        titleEN: 'Foot care',
+        treatments: [
+          { nameDE: 'Fachfußpflege inkl. Fußbad', nameEN: 'Pedicure incl. foot bath', duration: '1 Std.', price: 38 },
+          { nameDE: 'Shellac entfernen (Fremdarbeit)', nameEN: 'Shellac removal (external)', duration: '15 Min.', price: 10 },
+        ],
+      },
     ],
+    treatments: [],
     shortLabelDE: 'Body',
     shortLabelEN: 'Body',
   },
 ];
 
+// Top picks for homepage snapshot
 export const featuredPrices = [
   { labelDE: 'Powderbrows PMU', labelEN: 'Powder Brows PMU', price: 319, duration: '2,5 Std.' },
   { labelDE: 'Wimpernverlängerung', labelEN: 'Lash Extensions', price: 119, duration: '2 Std.', from: true },
   { labelDE: 'Aquafacial', labelEN: 'Aquafacial', price: 89, duration: '45 Min.' },
-  { labelDE: 'Microneedling', labelEN: 'Microneedling', price: 95, duration: '60 Min.' },
+  { labelDE: 'Beratung', labelEN: 'Consultation', price: 0, duration: '15 Min.', free: true },
 ];
 
 export const philosophy = [
   {
     eyebrowDE: 'Hauttyp zuerst', eyebrowEN: 'Skin type first',
     titleDE: 'Beratung vor jeder Linie.', titleEN: 'Consultation before any line.',
-    bodyDE: 'Permanent Make-up ist nicht eine Nadel und Farbe — es ist Form, Hautton, Pigmenthaltbarkeit. Jede Behandlung beginnt mit einem ruhigen Vorgespräch.',
-    bodyEN: 'Permanent make-up is not just needle and pigment — it is shape, undertone, pigment retention. Every treatment starts with a calm conversation.',
+    bodyDE: 'Permanent Make-up ist nicht eine Nadel und Farbe — es ist Form, Hautton, Pigmenthaltbarkeit. Jede Behandlung beginnt mit einem ruhigen Vorgespräch — kostenlos.',
+    bodyEN: 'Permanent make-up is not just needle and pigment — it is shape, undertone, pigment retention. Every treatment starts with a calm conversation — free of charge.',
   },
   {
     eyebrowDE: 'Hand-präzise', eyebrowEN: 'Hand-precise',
@@ -310,7 +394,7 @@ export const philosophy = [
     bodyEN: 'We work with the finest micro-needle and mineral pigments that fade softly over time — never blue, never cold.',
   },
   {
-    eyebrowDE: 'Nachsorge mit Plan', eyebrowEN: 'Aftercare with a plan',
+    eyebrowDE: 'Nachsorge inklusive', eyebrowEN: 'Aftercare included',
     titleDE: 'Vier Wochen später, wir sehen uns wieder.', titleEN: 'Four weeks later, we see each other again.',
     bodyDE: 'Jede PMU-Behandlung beinhaltet einen Termin zur Nachpflege. Ohne Aufpreis. Heilung ist Teil des Ergebnisses.',
     bodyEN: 'Every PMU treatment includes a follow-up appointment. No surcharge. Healing is part of the result.',
@@ -324,8 +408,17 @@ export const studioFacts = [
   { eyebrowDE: 'Buchung', eyebrowEN: 'Booking', valueDE: 'Planity · WhatsApp · Telefon', valueEN: 'Planity · WhatsApp · Phone' },
 ];
 
-export function formatPrice(p: number | [number, number], locale: 'de' | 'en' = 'de'): string {
+export function formatPrice(p: number | [number, number] | 'free', locale: 'de' | 'en' = 'de'): string {
+  if (p === 'free') return locale === 'de' ? 'kostenlos' : 'free';
   const fromLabel = locale === 'de' ? 'ab' : 'from';
   if (Array.isArray(p)) return `${fromLabel} ${p[0]} €`;
   return `${p} €`;
+}
+
+/** Total visible treatment count across all families — for the hero "über 40" claim. */
+export function totalTreatmentCount(): number {
+  return services.reduce((acc, s) => {
+    const groupCount = s.groups?.reduce((a, g) => a + g.treatments.length, 0) ?? 0;
+    return acc + s.treatments.length + groupCount;
+  }, 0);
 }

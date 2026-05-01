@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowRight, MessageCircle, Clock, Sparkles } from 'lucide-react';
-import { studio, services, type ServiceFamily, formatPrice } from '../data';
+import { studio, services, type ServiceFamily, type Treatment, formatPrice } from '../data';
 import { useLocale } from '../i18n';
 import Reveal from '../components/Reveal';
 import RevealText from '../components/RevealText';
@@ -155,30 +155,26 @@ function ServiceSection({ service: s, reverse }: { service: ServiceFamily; rever
               <Reveal kind="rise-blur" scroll delay={0.15}>
                 <div className="rounded-2xl p-6 md:p-8 border hairline bg-bg/50 backdrop-blur-sm">
                   <p className="eyebrow text-fog mb-6">{t('Behandlungen', 'Treatments')}</p>
-                  <ul className="divide-y hairline">
-                    {s.treatments.map(t2 => (
-                      <li key={t2.nameDE} className="py-4 first:pt-0 last:pb-0">
-                        <div className="flex items-baseline justify-between gap-4 mb-1">
-                          <span className="font-display text-lg md:text-xl text-pearl">
-                            {pick(t2.nameDE, t2.nameEN)}
-                          </span>
-                          <span className="font-display text-rose text-xl md:text-2xl whitespace-nowrap">
-                            {formatPrice(t2.price, locale)}
-                          </span>
+                  {s.groups ? (
+                    <div className="space-y-7">
+                      {s.groups.map((g, gi) => (
+                        <div key={g.titleDE} className={gi > 0 ? 'pt-7 border-t hairline' : ''}>
+                          <p className="eyebrow text-rose mb-4">{pick(g.titleDE, g.titleEN)}</p>
+                          <ul className="divide-y hairline">
+                            {g.treatments.map(t2 => (
+                              <TreatmentRow key={t2.nameDE} treatment={t2} />
+                            ))}
+                          </ul>
                         </div>
-                        <div className="flex items-baseline justify-between gap-4">
-                          <span className="text-xs text-mist/80">
-                            {t2.noteDE && pick(t2.noteDE, t2.noteEN ?? t2.noteDE)}
-                          </span>
-                          {t2.duration && (
-                            <span className="inline-flex items-center gap-1.5 text-xs text-fog font-mono">
-                              <Clock size={11} /> {t2.duration}
-                            </span>
-                          )}
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
+                      ))}
+                    </div>
+                  ) : (
+                    <ul className="divide-y hairline">
+                      {s.treatments.map(t2 => (
+                        <TreatmentRow key={t2.nameDE} treatment={t2} />
+                      ))}
+                    </ul>
+                  )}
                 </div>
 
                 {(s.aftercareDE || s.aftercareEN) && (
@@ -212,5 +208,36 @@ function ServiceSection({ service: s, reverse }: { service: ServiceFamily; rever
         </div>
       </div>
     </section>
+  );
+}
+
+function TreatmentRow({ treatment: t2 }: { treatment: Treatment }) {
+  const { pick, locale } = useLocale();
+  const isFree = t2.price === 'free';
+  return (
+    <li className="py-4 first:pt-0 last:pb-0">
+      <div className="flex items-baseline justify-between gap-4 mb-1">
+        <span className="font-display text-base md:text-lg text-pearl leading-tight">
+          {pick(t2.nameDE, t2.nameEN)}
+        </span>
+        <span
+          className={`font-display text-lg md:text-xl whitespace-nowrap ${
+            isFree ? 'text-rose italic' : 'text-rose'
+          }`}
+        >
+          {formatPrice(t2.price, locale)}
+        </span>
+      </div>
+      <div className="flex items-baseline justify-between gap-4">
+        <span className="text-xs text-mist/70">
+          {t2.noteDE && pick(t2.noteDE, t2.noteEN ?? t2.noteDE)}
+        </span>
+        {t2.duration && (
+          <span className="inline-flex items-center gap-1.5 text-xs text-fog font-mono">
+            <Clock size={10} /> {t2.duration}
+          </span>
+        )}
+      </div>
+    </li>
   );
 }
