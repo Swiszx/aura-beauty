@@ -5,6 +5,7 @@ import { studio, services } from '../data';
 import { useLocale } from '../i18n';
 import Reveal from '../components/Reveal';
 import RevealText from '../components/RevealText';
+import MapEmbed from '../components/MapEmbed';
 
 export default function BookingPage() {
   const { t, pick } = useLocale();
@@ -163,8 +164,8 @@ export default function BookingPage() {
       {/* Studio orientation */}
       <section className="relative px-5 md:px-10 py-20 md:py-28 border-t hairline">
         <div className="max-w-[1400px] mx-auto">
-          <div className="grid md:grid-cols-3 gap-10 md:gap-14">
-            <Reveal kind="rise" scroll>
+          <div className="grid md:grid-cols-12 gap-10 md:gap-14 mb-10 md:mb-14">
+            <Reveal kind="rise" scroll className="md:col-span-4">
               <p className="eyebrow text-fog mb-5 inline-flex items-center gap-2">
                 <MapPin size={12} className="text-rose" /> {t('Adresse', 'Address')}
               </p>
@@ -179,7 +180,7 @@ export default function BookingPage() {
                 {t('In Karte öffnen', 'Open in map')} <ArrowRight size={14} />
               </a>
             </Reveal>
-            <Reveal kind="rise" scroll delay={0.1}>
+            <Reveal kind="rise" scroll delay={0.1} className="md:col-span-4">
               <p className="eyebrow text-fog mb-5 inline-flex items-center gap-2">
                 <Clock size={12} className="text-rose" /> {t('Öffnungszeiten', 'Hours')}
               </p>
@@ -194,7 +195,7 @@ export default function BookingPage() {
                 ))}
               </ul>
             </Reveal>
-            <Reveal kind="rise" scroll delay={0.2}>
+            <Reveal kind="rise" scroll delay={0.2} className="md:col-span-4">
               <p className="eyebrow text-fog mb-5">{t('Bezahlung', 'Payment')}</p>
               <ul className="space-y-2 text-pearl/90 text-sm">
                 {pick(studio.paymentsDE, studio.paymentsEN).map(p => (
@@ -211,6 +212,10 @@ export default function BookingPage() {
               </p>
             </Reveal>
           </div>
+
+          <Reveal kind="rise-blur" scroll delay={0.15}>
+            <MapEmbed />
+          </Reveal>
         </div>
       </section>
     </div>

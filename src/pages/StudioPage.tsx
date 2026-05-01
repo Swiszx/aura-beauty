@@ -5,6 +5,7 @@ import { studio, studioFacts, philosophy } from '../data';
 import { useLocale } from '../i18n';
 import Reveal from '../components/Reveal';
 import RevealText from '../components/RevealText';
+import MapEmbed from '../components/MapEmbed';
 
 export default function StudioPage() {
   const { t, pick } = useLocale();
@@ -229,6 +230,29 @@ export default function StudioPage() {
               </Reveal>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Find us — interactive map */}
+      <section className="px-5 md:px-10 pt-4 md:pt-8">
+        <div className="max-w-[1400px] mx-auto">
+          <Reveal kind="rise-blur" scroll>
+            <p className="eyebrow text-fog mb-4 inline-flex items-center gap-2">
+              <MapPin size={12} className="text-rose" /> {t('So findest du uns', 'How to find us')}
+            </p>
+            <h2 className="display-mega text-4xl md:text-6xl leading-[0.95] mb-3">
+              {t('Niederwerrner', 'Niederwerrner')} <span className="display-italic text-rose">Straße.</span>
+            </h2>
+            <p className="text-mist text-sm md:text-base leading-relaxed max-w-xl mb-10">
+              {t(
+                'Direkt im Zentrum von Schweinfurt — gut erreichbar mit Auto, ÖPNV und zu Fuß.',
+                'Right in the centre of Schweinfurt — easy to reach by car, public transport or on foot.'
+              )}
+            </p>
+          </Reveal>
+          <Reveal kind="rise-blur" scroll delay={0.1}>
+            <MapEmbed />
+          </Reveal>
         </div>
       </section>
     </div>

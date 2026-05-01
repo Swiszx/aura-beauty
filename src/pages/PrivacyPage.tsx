@@ -51,6 +51,12 @@ export default function PrivacyPage() {
                 'We link to Instagram, Facebook, Planity and Google Fonts. Clicking those links or loading external fonts may transmit data to the respective providers.'
               )}
             </p>
+            <p className="mt-3">
+              {t(
+                'Die Karte unseres Studios wird über Google Maps bereitgestellt. Sie wird erst geladen, wenn du aktiv auf „Karte anzeigen" klickst — vorher werden keine Daten an Google übertragen. Beim Anzeigen der Karte bzw. beim Klick auf „Route" können Daten (z. B. IP-Adresse) an Google Ireland Limited übermittelt werden.',
+                'The map of our studio is provided via Google Maps. It is only loaded when you actively click "Show map" — before that, no data is transmitted to Google. Loading the map or clicking "Directions" may transmit data (e.g. IP address) to Google Ireland Limited.'
+              )}
+            </p>
           </section>
 
           <section>
