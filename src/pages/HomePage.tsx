@@ -25,8 +25,8 @@ function Hero() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
 
-  // Parallax: background photo moves slower than scroll (classic parallax),
-  // foreground text drifts up faster, fading out before the next section.
+  // Parallax — DESKTOP ONLY. On mobile the photo and text live in separate
+  // stacked regions; transforming them on scroll makes them collide.
   const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '25%']);
   const bgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.05, 1.08, 1.12]);
   const accentY = useTransform(scrollYProgress, [0, 1], ['0%', '-15%']);
@@ -35,177 +35,257 @@ function Hero() {
   const headlineLines = pick(studio.hero.headlineDE, studio.hero.headlineEN).split('\n');
 
   return (
-    <section ref={ref} className="relative min-h-[100vh] md:min-h-[110vh] overflow-hidden bg-bg">
-      {/* === Backgrounds (different per breakpoint, both with parallax) === */}
-
-      {/* Desktop: wide-shot photo on the right ~60%, solid bg on the left */}
-      <motion.div
-        style={{ y: bgY, scale: bgScale, backgroundImage: 'url(/photos/neon-wide.jpg)' }}
-        className="hidden md:block absolute inset-0 md:left-[40%] bg-cover bg-center will-change-transform"
-        aria-hidden="true"
-      />
-
-      {/* Mobile: brand-mark close-up at top of viewport, text below it on solid bg.
-       * The photo only fills the top portion so the "Aura Beauty" neon stays in frame
-       * and never gets cut off by a portrait crop. */}
-      <motion.div
-        style={{ y: bgY, scale: bgScale, backgroundImage: 'url(/photos/neon-pmu.jpg)' }}
-        className="md:hidden absolute top-0 inset-x-0 h-[52vh] bg-cover bg-center will-change-transform"
-        aria-hidden="true"
-      />
-
-      {/* === Scrims === */}
-
-      {/* Desktop horizontal scrim */}
-      <div
-        className="hidden md:block absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'linear-gradient(90deg, var(--color-bg) 0%, var(--color-bg) 35%, rgba(11,7,16,0.85) 50%, rgba(11,7,16,0.55) 70%, rgba(11,7,16,0.30) 100%)',
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Mobile: only a soft fade at the very bottom of the photo so it merges into the solid bg.
-       * Top of the photo is fully visible — brand mark always readable. */}
-      <div
-        className="md:hidden absolute top-0 inset-x-0 h-[52vh] pointer-events-none"
-        style={{
-          background:
-            'linear-gradient(180deg, rgba(11,7,16,0.10) 0%, rgba(11,7,16,0.10) 55%, rgba(11,7,16,0.55) 80%, var(--color-bg) 100%)',
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Top status strip */}
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1, duration: 0.6 }}
-        className="absolute top-20 md:top-28 left-0 right-0 px-5 md:px-10 z-20 flex items-center justify-between eyebrow"
-      >
-        <span className="text-pearl bg-bg/45 backdrop-blur-sm px-3 py-1.5 rounded-full md:bg-transparent md:backdrop-blur-0 md:p-0 md:text-pearl/80">
-          {pick(studio.hero.eyebrowDE, studio.hero.eyebrowEN)}
-        </span>
-        <span className="hidden md:inline-flex items-center gap-2 text-pearl/80">
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-rose animate-pulse" />
-          {t('Termine offen', 'Booking open')}
-        </span>
-      </motion.div>
-
-      {/* Headline column — desktop: vertically centered; mobile: pushed below the photo */}
-      <motion.div
-        style={{ y: titleY, opacity: fadeOut }}
-        className="absolute inset-0 z-20 flex flex-col md:items-center md:justify-center px-5 md:px-10"
-      >
-        {/* Mobile spacer — reserves room for the photo on top */}
-        <div className="md:hidden h-[52vh] flex-shrink-0" aria-hidden="true" />
-
-        <div className="max-w-[1400px] mx-auto w-full md:grid md:grid-cols-12 md:gap-10 pt-7 md:pt-0">
-          <div className="md:col-span-7 lg:col-span-6">
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="eyebrow text-rose mb-5 md:mb-10"
-            >
-              {pick(studio.taglineDE, studio.taglineEN)}
-            </motion.p>
-
-            <h1 className="display-mega text-[12.5vw] sm:text-[10vw] md:text-[8vw] lg:text-[6.8vw] xl:text-[6.2vw] leading-[0.95]" translate="no">
-              {headlineLines.map((line, i) => {
-                const isItalic = i === 1;
-                return (
-                  <span key={i} className="block">
-                    <RevealText
-                      text={line}
-                      by="letter"
-                      delay={0.25 + i * 0.18}
-                      stagger={0.04}
-                      duration={0.85}
-                      className={isItalic ? 'display-italic text-rose' : ''}
-                    />
-                  </span>
-                );
-              })}
-            </h1>
-
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.3, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-5 md:mt-12 max-w-md"
-            >
-              <p className="text-mist text-sm md:text-lg leading-relaxed">
-                {pick(studio.hero.subDE, studio.hero.subEN)}
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.55, duration: 0.6 }}
-              className="mt-6 md:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-md"
-            >
-              <Link
-                to="/termin"
-                className="cta-shimmer tap inline-flex items-center justify-center gap-3 bg-pearl text-bg font-semibold px-7 py-4 text-sm tracking-widest uppercase rounded-full hover:bg-rose active:bg-rose transition-colors"
-              >
-                {t('Termin buchen', 'Book appointment')} <ArrowRight size={16} />
-              </Link>
-              <a
-                href={studio.contact.whatsapp}
-                target="_blank"
-                rel="noreferrer"
-                className="tap inline-flex items-center justify-center gap-2 px-7 py-4 text-sm tracking-widest uppercase font-medium border border-pearl/30 hover:border-rose hover:text-rose active:border-rose text-pearl rounded-full transition-colors"
-              >
-                <MessageCircle size={16} /> WhatsApp
-              </a>
-            </motion.div>
-          </div>
-
-          {/* Floating accent card — desktop only */}
-          <motion.div
-            style={{ y: accentY }}
-            initial={{ opacity: 0, x: 24 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1.4, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden md:flex md:col-span-5 lg:col-span-5 lg:col-start-8 self-end pb-16"
+    <section ref={ref} className="relative overflow-hidden bg-bg">
+      {/* ============================================================
+          MOBILE LAYOUT — clean photo-on-top, text-on-bottom split.
+          No parallax: fixes overlap when scrolling.
+          ============================================================ */}
+      <div className="md:hidden relative flex flex-col min-h-[100vh]">
+        {/* Photo region */}
+        <div className="relative h-[52vh] flex-shrink-0 overflow-hidden">
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: 'url(/photos/neon-pmu.jpg)' }}
+            aria-hidden="true"
+          />
+          {/* Soft fade at the bottom 1/3 so photo merges into the bg */}
+          <div
+            className="absolute inset-x-0 bottom-0 h-32 pointer-events-none"
+            style={{
+              background: 'linear-gradient(180deg, transparent 0%, var(--color-bg) 100%)',
+            }}
+            aria-hidden="true"
+          />
+          {/* Top status pill on the photo */}
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.6 }}
+            className="absolute top-20 left-5 eyebrow text-pearl bg-bg/55 backdrop-blur-sm px-3 py-1.5 rounded-full"
           >
-            <div className="ml-auto max-w-[320px] rounded-2xl bg-bg/70 border hairline p-6 backdrop-blur-md">
-              <div className="flex items-center gap-1.5 mb-4">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} size={12} className="fill-rose text-rose" />
-                ))}
-                <span className="eyebrow text-pearl ml-2">{studio.social.rating.toFixed(1)} · Planity</span>
-              </div>
-              <p className="font-display italic text-pearl text-lg leading-snug mb-3">
-                {t('„Sehr entspannend und professionell."', '“Very relaxing and professional.”')}
-              </p>
-              <p className="text-xs text-mist">
-                {t(
-                  `${studio.social.reviewCount} verifizierte Bewertungen · 5,0 ★`,
-                  `${studio.social.reviewCount} verified reviews · 5.0 ★`
-                )}
-              </p>
+            {pick(studio.hero.eyebrowDE, studio.hero.eyebrowEN)}
+          </motion.p>
+        </div>
+
+        {/* Text region — solid bg, never overlaps photo */}
+        <div className="flex-1 px-5 pt-6 pb-12 flex flex-col">
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="eyebrow text-rose mb-4"
+          >
+            {pick(studio.taglineDE, studio.taglineEN)}
+          </motion.p>
+
+          <h1 className="display-mega text-[12.5vw] xs:text-[11vw] sm:text-[9vw] leading-[0.95]" translate="no">
+            {headlineLines.map((line, i) => {
+              const isItalic = i === 1;
+              return (
+                <span key={i} className="block">
+                  <RevealText
+                    text={line}
+                    by="letter"
+                    delay={0.25 + i * 0.18}
+                    stagger={0.04}
+                    duration={0.85}
+                    className={isItalic ? 'display-italic text-rose' : ''}
+                  />
+                </span>
+              );
+            })}
+          </h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.0, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="text-mist text-sm leading-relaxed mt-5"
+          >
+            {pick(studio.hero.subDE, studio.hero.subEN)}
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 0.5 }}
+            className="mt-6 flex flex-col gap-3"
+          >
+            <Link
+              to="/termin"
+              className="cta-shimmer tap inline-flex items-center justify-center gap-3 bg-pearl text-bg font-semibold px-7 py-4 text-sm tracking-widest uppercase rounded-full active:bg-rose"
+            >
+              {t('Termin buchen', 'Book appointment')} <ArrowRight size={16} />
+            </Link>
+            <a
+              href={studio.contact.whatsapp}
+              target="_blank"
+              rel="noreferrer"
+              className="tap inline-flex items-center justify-center gap-2 px-7 py-4 text-sm tracking-widest uppercase font-medium border border-pearl/30 active:border-rose text-pearl rounded-full"
+            >
+              <MessageCircle size={16} /> WhatsApp
+            </a>
+          </motion.div>
+
+          {/* Inline review chip on mobile (replaces the floating accent card) */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.4, duration: 0.6 }}
+            className="mt-7 flex items-center gap-2.5"
+          >
+            <div className="flex items-center gap-0.5">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} size={11} className="fill-rose text-rose" />
+              ))}
             </div>
+            <span className="eyebrow text-pearl/85">
+              {t(`${studio.social.rating.toFixed(1).replace('.', ',')} · ${studio.social.reviewCount} Bewertungen`, `${studio.social.rating.toFixed(1)} · ${studio.social.reviewCount} reviews`)}
+            </span>
           </motion.div>
         </div>
-      </motion.div>
+      </div>
 
-      {/* Scroll indicator — desktop only (mobile uses the bottom action bar already) */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 8, 0] }}
-        transition={{
-          opacity: { delay: 1.7, duration: 0.8 },
-          y: { delay: 1.7, duration: 2, repeat: Infinity, ease: 'easeInOut' },
-        }}
-        className="hidden md:flex absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex-col items-center gap-2 text-pearl/70"
-      >
-        <span className="eyebrow">{t('Scrollen', 'Scroll')}</span>
-        <ArrowDown size={14} />
-      </motion.div>
+      {/* ============================================================
+          DESKTOP LAYOUT — full-bleed parallax photo on the right,
+          text column on the left, floating review card mid-right.
+          ============================================================ */}
+      <div className="hidden md:block relative min-h-[110vh]">
+        <motion.div
+          style={{ y: bgY, scale: bgScale, backgroundImage: 'url(/photos/neon-wide.jpg)' }}
+          className="absolute inset-0 left-[40%] bg-cover bg-center will-change-transform"
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'linear-gradient(90deg, var(--color-bg) 0%, var(--color-bg) 35%, rgba(11,7,16,0.85) 50%, rgba(11,7,16,0.55) 70%, rgba(11,7,16,0.30) 100%)',
+          }}
+          aria-hidden="true"
+        />
+
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1, duration: 0.6 }}
+          className="absolute top-28 left-0 right-0 px-10 z-20 flex items-center justify-between eyebrow"
+        >
+          <span className="text-pearl/80">{pick(studio.hero.eyebrowDE, studio.hero.eyebrowEN)}</span>
+          <span className="inline-flex items-center gap-2 text-pearl/80">
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-rose animate-pulse" />
+            {t('Termine offen', 'Booking open')}
+          </span>
+        </motion.div>
+
+        <motion.div
+          style={{ y: titleY, opacity: fadeOut }}
+          className="absolute inset-0 z-20 flex items-center justify-center px-10"
+        >
+          <div className="max-w-[1400px] mx-auto w-full grid grid-cols-12 gap-10">
+            <div className="col-span-7 lg:col-span-6">
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="eyebrow text-rose mb-10"
+              >
+                {pick(studio.taglineDE, studio.taglineEN)}
+              </motion.p>
+
+              <h1 className="display-mega text-[8vw] lg:text-[6.8vw] xl:text-[6.2vw] leading-[0.92]" translate="no">
+                {headlineLines.map((line, i) => {
+                  const isItalic = i === 1;
+                  return (
+                    <span key={i} className="block">
+                      <RevealText
+                        text={line}
+                        by="letter"
+                        delay={0.25 + i * 0.18}
+                        stagger={0.04}
+                        duration={0.85}
+                        className={isItalic ? 'display-italic text-rose' : ''}
+                      />
+                    </span>
+                  );
+                })}
+              </h1>
+
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.3, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="mt-12 max-w-md"
+              >
+                <p className="text-mist text-lg leading-relaxed">
+                  {pick(studio.hero.subDE, studio.hero.subEN)}
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.55, duration: 0.6 }}
+                className="mt-10 flex flex-row gap-4 max-w-md"
+              >
+                <Link
+                  to="/termin"
+                  className="cta-shimmer inline-flex items-center justify-center gap-3 bg-pearl text-bg font-semibold px-7 py-4 text-sm tracking-widest uppercase rounded-full hover:bg-rose transition-colors"
+                >
+                  {t('Termin buchen', 'Book appointment')} <ArrowRight size={16} />
+                </Link>
+                <a
+                  href={studio.contact.whatsapp}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-4 text-sm tracking-widest uppercase font-medium border border-pearl/30 hover:border-rose hover:text-rose text-pearl rounded-full transition-colors"
+                >
+                  <MessageCircle size={16} /> WhatsApp
+                </a>
+              </motion.div>
+            </div>
+
+            <motion.div
+              style={{ y: accentY }}
+              initial={{ opacity: 0, x: 24 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1.4, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="col-span-5 lg:col-span-5 lg:col-start-8 self-end pb-16 flex"
+            >
+              <div className="ml-auto max-w-[320px] rounded-2xl bg-bg/70 border hairline p-6 backdrop-blur-md">
+                <div className="flex items-center gap-1.5 mb-4">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} size={12} className="fill-rose text-rose" />
+                  ))}
+                  <span className="eyebrow text-pearl ml-2">{studio.social.rating.toFixed(1)} · Planity</span>
+                </div>
+                <p className="font-display italic text-pearl text-lg leading-snug mb-3">
+                  {t('„Sehr entspannend und professionell."', '“Very relaxing and professional.”')}
+                </p>
+                <p className="text-xs text-mist">
+                  {t(
+                    `${studio.social.reviewCount} verifizierte Bewertungen · 5,0 ★`,
+                    `${studio.social.reviewCount} verified reviews · 5.0 ★`
+                  )}
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, y: [0, 8, 0] }}
+          transition={{
+            opacity: { delay: 1.7, duration: 0.8 },
+            y: { delay: 1.7, duration: 2, repeat: Infinity, ease: 'easeInOut' },
+          }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 text-pearl/70"
+        >
+          <span className="eyebrow">{t('Scrollen', 'Scroll')}</span>
+          <ArrowDown size={14} />
+        </motion.div>
+      </div>
     </section>
   );
 }
