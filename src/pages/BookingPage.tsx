@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 import { ArrowRight, MessageCircle, Phone, Calendar, Clock, MapPin } from 'lucide-react';
 import { studio, services } from '../data';
 import { useLocale } from '../i18n';
@@ -50,7 +51,7 @@ export default function BookingPage() {
                 href={studio.contact.planity}
                 target="_blank"
                 rel="noreferrer"
-                className="relative aura-pmu rounded-3xl p-7 md:p-9 block overflow-hidden tile-hover hairline border h-full"
+                className="relative bg-bg-soft rounded-3xl p-7 md:p-9 block overflow-hidden tile-hover hairline border h-full hover:border-rose/40 transition-colors"
               >
                 <div className="relative z-10 flex flex-col h-full min-h-[260px]">
                   <Calendar size={24} className="text-rose mb-6" />
@@ -74,7 +75,7 @@ export default function BookingPage() {
                 href={studio.contact.whatsapp}
                 target="_blank"
                 rel="noreferrer"
-                className="relative aura-lashes rounded-3xl p-7 md:p-9 block overflow-hidden tile-hover hairline border h-full"
+                className="relative bg-bg-soft rounded-3xl p-7 md:p-9 block overflow-hidden tile-hover hairline border h-full hover:border-rose/40 transition-colors"
               >
                 <div className="relative z-10 flex flex-col h-full min-h-[260px]">
                   <MessageCircle size={24} className="text-rose mb-6" />
@@ -96,7 +97,7 @@ export default function BookingPage() {
             <Reveal kind="rise-blur" scroll delay={0.2}>
               <a
                 href={`tel:${studio.contact.phone}`}
-                className="relative aura-skin rounded-3xl p-7 md:p-9 block overflow-hidden tile-hover hairline border h-full"
+                className="relative bg-bg-soft rounded-3xl p-7 md:p-9 block overflow-hidden tile-hover hairline border h-full hover:border-rose/40 transition-colors"
               >
                 <div className="relative z-10 flex flex-col h-full min-h-[260px]">
                   <Phone size={24} className="text-rose mb-6" />

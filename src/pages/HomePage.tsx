@@ -4,7 +4,6 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowRight, ArrowDown, MessageCircle, Star, MapPin, Phone } from 'lucide-react';
 import { studio, services, philosophy, featuredPrices } from '../data';
 import { useLocale } from '../i18n';
-import AuroraBackground from '../components/AuroraBackground';
 import Reveal from '../components/Reveal';
 import RevealText from '../components/RevealText';
 
@@ -31,9 +30,20 @@ function Hero() {
 
   return (
     <section ref={ref} className="relative min-h-[100vh] md:min-h-[110vh] overflow-hidden">
-      {/* Aurora is intentional ONLY on hero — sets the brand tone, then the
-       * rest of the site is clean dark surfaces with single rose accents. */}
-      <AuroraBackground />
+      {/* Hero background — real studio neon photo with a deep dark scrim so headline reads cleanly. */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: 'url(/photos/neon-wide.jpg)' }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'linear-gradient(180deg, rgba(11,7,16,0.55) 0%, rgba(11,7,16,0.78) 55%, rgba(11,7,16,0.95) 100%)',
+        }}
+        aria-hidden="true"
+      />
 
       <motion.div
         initial={{ opacity: 0, y: 8 }}
@@ -73,7 +83,7 @@ function Hero() {
                     delay={0.25 + i * 0.18}
                     stagger={0.04}
                     duration={0.85}
-                    className={isItalic ? 'display-italic text-aurora' : ''}
+                    className={isItalic ? 'display-italic text-rose' : ''}
                   />
                 </span>
               );
@@ -173,8 +183,7 @@ function ServiceConstellation() {
           </div>
         </div>
 
-        {/* Service cards keep their per-service color signature (aura-pmu, aura-lashes, etc.).
-         * That IS the design — five distinct auras. No additional aurora background here. */}
+        {/* Service tiles use real studio photos with a calm dark scrim — not gradient surfaces. */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {services.map((s, i) => (
             <Reveal
@@ -186,10 +195,11 @@ function ServiceConstellation() {
             >
               <Link
                 to={`/leistungen#${s.id}`}
-                className={`relative ${s.auraClass} block group rounded-3xl p-7 md:p-10 h-full overflow-hidden tile-hover hairline border min-h-[300px] md:min-h-[340px] ${i === 0 ? 'lg:min-h-[700px]' : ''}`}
+                className={`relative photo-tile block group rounded-3xl p-7 md:p-10 h-full overflow-hidden tile-hover hairline border min-h-[300px] md:min-h-[340px] ${i === 0 ? 'lg:min-h-[700px]' : ''}`}
+                style={{ backgroundImage: `url(${s.photo})` }}
               >
                 <div className="relative z-10 flex flex-col h-full">
-                  <p className="eyebrow text-mist mb-6 md:mb-8">{pick(s.eyebrowDE, s.eyebrowEN)}</p>
+                  <p className="eyebrow text-pearl/80 mb-6 md:mb-8">{pick(s.eyebrowDE, s.eyebrowEN)}</p>
 
                   <h3 className={`font-display font-light leading-[0.95] text-pearl ${i === 0 ? 'text-5xl md:text-6xl lg:text-7xl' : 'text-3xl md:text-4xl'}`}>
                     {pick(s.titleDE, s.titleEN)}
@@ -197,11 +207,11 @@ function ServiceConstellation() {
                     <span className="display-italic text-rose">{pick(s.italicDE, s.italicEN)}</span>
                   </h3>
 
-                  <p className={`text-mist leading-relaxed ${i === 0 ? 'text-base md:text-lg mt-6 max-w-md' : 'text-sm mt-5'}`}>
+                  <p className={`text-pearl-soft leading-relaxed ${i === 0 ? 'text-base md:text-lg mt-6 max-w-md' : 'text-sm mt-5'}`}>
                     {pick(s.taglineDE, s.taglineEN)}
                   </p>
 
-                  <div className="mt-auto pt-8 flex items-center gap-2 text-pearl/80 group-hover:text-rose text-sm tracking-widest uppercase transition-colors">
+                  <div className="mt-auto pt-8 flex items-center gap-2 text-pearl group-hover:text-rose text-sm tracking-widest uppercase transition-colors">
                     {t('Entdecken', 'Discover')} <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
@@ -348,14 +358,17 @@ function ProofStrip() {
 
           <div className="md:col-span-6 md:col-start-7">
             <Reveal kind="rise-blur" scroll delay={0.15}>
-              <div className="relative aspect-[4/5] md:aspect-[5/6] rounded-3xl overflow-hidden border hairline aura-pmu">
+              <div
+                className="relative photo-tile aspect-[4/5] md:aspect-[5/6] rounded-3xl overflow-hidden border hairline"
+                style={{ backgroundImage: 'url(/photos/rabia-studio.jpg)' }}
+              >
                 <div className="relative z-10 h-full flex flex-col justify-between p-7 md:p-10">
                   <p className="eyebrow text-rose">{t('Studio · Schweinfurt', 'Studio · Schweinfurt')}</p>
                   <div>
-                    <p className="font-display italic text-pearl/90 text-lg md:text-xl mb-3 leading-snug">
+                    <p className="font-display italic text-pearl text-lg md:text-xl mb-3 leading-snug">
                       {t('„Sehr professionell, ich komme wieder."', '“Very professional, I’m coming back.”')}
                     </p>
-                    <p className="text-xs text-fog">
+                    <p className="text-xs text-pearl/70">
                       {t(
                         `— Eine von ${studio.social.reviewCount} Bewertungen auf Planity`,
                         `— One of ${studio.social.reviewCount} reviews on Planity`
@@ -375,15 +388,13 @@ function ProofStrip() {
 function FinalCTA() {
   const { t } = useLocale();
   return (
-    <section className="relative py-32 md:py-48 px-5 md:px-10 border-t hairline overflow-hidden">
-      {/* Final CTA gets aurora — bookend pair with the hero. Nowhere in between. */}
-      <AuroraBackground />
+    <section className="relative py-32 md:py-48 px-5 md:px-10 border-t hairline overflow-hidden bg-bg-soft">
       <div className="relative max-w-[1200px] mx-auto text-center">
         <p className="eyebrow text-rose mb-6">{t('Termin', 'Booking')}</p>
         <Reveal kind="rise-blur" scroll>
           <h2 className="display-mega text-5xl sm:text-7xl md:text-9xl lg:text-[10rem] leading-[0.95] md:leading-[0.9] mb-10" translate="no">
             <span className="block">{t('Buch dir', 'Book your')}</span>
-            <span className="display-italic text-aurora">{t('deine Aura.', 'aura.')}</span>
+            <span className="display-italic text-rose">{t('deine Aura.', 'aura.')}</span>
           </h2>
         </Reveal>
         <Reveal kind="rise" scroll delay={0.15}>

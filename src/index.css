@@ -97,72 +97,106 @@
   font-feature-settings: 'tnum';
 }
 
-.text-aurora {
-  background: linear-gradient(135deg, #E8A8B4 0%, #D4866B 35%, #C9A26C 70%, #8E5FA8 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-}
-
 @keyframes aurora-drift {
-  0%   { transform: translate(0%, 0%) rotate(0deg) scale(1); }
-  33%  { transform: translate(8%, -12%) rotate(120deg) scale(1.15); }
-  66%  { transform: translate(-10%, 8%) rotate(240deg) scale(1.05); }
-  100% { transform: translate(0%, 0%) rotate(360deg) scale(1); }
+  0%   { transform: translate(0%, 0%) scale(1); }
+  50%  { transform: translate(4%, -6%) scale(1.06); }
+  100% { transform: translate(0%, 0%) scale(1); }
 }
 @keyframes aurora-drift-slow {
-  0%   { transform: translate(0%, 0%) rotate(0deg) scale(1.1); }
-  50%  { transform: translate(-12%, 10%) rotate(180deg) scale(0.95); }
-  100% { transform: translate(0%, 0%) rotate(360deg) scale(1.1); }
+  0%   { transform: translate(0%, 0%) scale(1.04); }
+  50%  { transform: translate(-5%, 4%) scale(1); }
+  100% { transform: translate(0%, 0%) scale(1.04); }
 }
 @keyframes aurora-pulse {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 0.85; }
+  0%, 100% { opacity: 0.18; }
+  50% { opacity: 0.28; }
 }
 .aurora-layer {
   position: absolute;
-  inset: -25%;
+  inset: -20%;
   pointer-events: none;
-  filter: blur(80px);
+  filter: blur(100px);
   will-change: transform, opacity;
 }
 .aurora-layer-1 {
-  background: radial-gradient(circle at 30% 40%, rgba(232, 168, 180, 0.7), transparent 55%);
-  animation: aurora-drift 22s ease-in-out infinite, aurora-pulse 8s ease-in-out infinite;
+  background: radial-gradient(circle at 30% 40%, rgba(232, 168, 180, 0.35), transparent 60%);
+  animation: aurora-drift 28s ease-in-out infinite, aurora-pulse 14s ease-in-out infinite;
 }
 .aurora-layer-2 {
-  background: radial-gradient(circle at 70% 60%, rgba(212, 134, 107, 0.65), transparent 55%);
-  animation: aurora-drift-slow 28s ease-in-out infinite, aurora-pulse 10s ease-in-out infinite reverse;
+  background: radial-gradient(circle at 70% 60%, rgba(212, 134, 107, 0.30), transparent 60%);
+  animation: aurora-drift-slow 36s ease-in-out infinite, aurora-pulse 16s ease-in-out infinite reverse;
 }
 .aurora-layer-3 {
-  background: radial-gradient(circle at 50% 80%, rgba(142, 95, 168, 0.55), transparent 50%);
-  animation: aurora-drift 32s ease-in-out infinite reverse;
+  background: radial-gradient(circle at 50% 80%, rgba(142, 95, 168, 0.22), transparent 55%);
+  animation: aurora-drift 40s ease-in-out infinite reverse;
 }
 .aurora-layer-4 {
-  background: radial-gradient(circle at 20% 70%, rgba(201, 162, 108, 0.45), transparent 45%);
-  animation: aurora-drift-slow 36s ease-in-out infinite;
+  background: radial-gradient(circle at 20% 70%, rgba(201, 162, 108, 0.18), transparent 50%);
+  animation: aurora-drift-slow 44s ease-in-out infinite;
 }
 
+/* Each "aura" is now a flat dark surface with a single thin top accent line.
+ * Gone are the radial + linear gradient stacks — they hit the eyes too hard. */
 .aura-pmu {
-  background: radial-gradient(circle at 50% 30%, rgba(212, 134, 107, 0.35), transparent 55%),
-              linear-gradient(135deg, #2A1B22 0%, #1B0F2A 100%);
+  background: #14091E;
+  position: relative;
+}
+.aura-pmu::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 134, 107, 0.55), transparent);
 }
 .aura-lashes {
-  background: radial-gradient(circle at 50% 30%, rgba(142, 95, 168, 0.35), transparent 55%),
-              linear-gradient(135deg, #1F1530 0%, #0E0820 100%);
+  background: #110820;
+  position: relative;
+}
+.aura-lashes::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(142, 95, 168, 0.55), transparent);
 }
 .aura-brows {
-  background: radial-gradient(circle at 50% 30%, rgba(201, 162, 108, 0.32), transparent 55%),
-              linear-gradient(135deg, #2A2018 0%, #1A1410 100%);
+  background: #16100A;
+  position: relative;
+}
+.aura-brows::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 162, 108, 0.50), transparent);
 }
 .aura-skin {
-  background: radial-gradient(circle at 50% 30%, rgba(232, 168, 180, 0.32), transparent 55%),
-              linear-gradient(135deg, #2A1B25 0%, #18101F 100%);
+  background: #170A14;
+  position: relative;
+}
+.aura-skin::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(232, 168, 180, 0.50), transparent);
 }
 .aura-body {
-  background: radial-gradient(circle at 50% 30%, rgba(232, 196, 162, 0.28), transparent 55%),
-              linear-gradient(135deg, #2A1F1A 0%, #1A1212 100%);
+  background: #160F0A;
+  position: relative;
+}
+.aura-body::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(232, 196, 162, 0.45), transparent);
+}
+
+/* Photo tile — full image with a calm dark scrim at bottom for text legibility.
+ * No colored gradient overlay anywhere. */
+.photo-tile {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  isolation: isolate;
+}
+.photo-tile::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(11, 7, 16, 0.05) 0%, rgba(11, 7, 16, 0.55) 65%, rgba(11, 7, 16, 0.92) 100%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .glass {

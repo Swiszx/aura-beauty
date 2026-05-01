@@ -111,15 +111,23 @@ export default function ServicesPage() {
 }
 
 function ServiceSection({ service: s, reverse }: { service: ServiceFamily; reverse: boolean }) {
-  const { t, pick, locale } = useLocale();
+  const { t, pick } = useLocale();
   return (
     <section id={s.id} className="relative scroll-mt-24 mb-16 md:mb-24 px-5 md:px-10">
-      {/* Per-service aura class is the only color treatment — no extra aurora layer. */}
-      <div className={`relative max-w-[1400px] mx-auto rounded-3xl overflow-hidden ${s.auraClass} border hairline`}>
+      <div className="relative max-w-[1400px] mx-auto rounded-3xl overflow-hidden border hairline bg-bg-soft">
+        {/* Photo strip at top — sets the mood without flooding the section in color. */}
+        <div
+          className="relative h-44 md:h-72 photo-tile"
+          style={{ backgroundImage: `url(${s.photo})` }}
+        >
+          <div className="absolute inset-0 z-[1] flex items-end p-6 md:p-10">
+            <p className="eyebrow text-rose">{pick(s.eyebrowDE, s.eyebrowEN)}</p>
+          </div>
+        </div>
+
         <div className="relative z-10 p-7 md:p-14 lg:p-20">
           <div className={`grid md:grid-cols-12 gap-10 md:gap-14 ${reverse ? 'md:[direction:rtl]' : ''}`}>
             <div className="md:col-span-5 md:[direction:ltr]">
-              <p className="eyebrow text-rose mb-5">{pick(s.eyebrowDE, s.eyebrowEN)}</p>
               <Reveal kind="rise-blur" scroll>
                 <h2 className="display-mega text-4xl md:text-5xl lg:text-6xl leading-[0.95] mb-6">
                   {pick(s.titleDE, s.titleEN)}

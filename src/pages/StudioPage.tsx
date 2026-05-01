@@ -104,21 +104,25 @@ export default function StudioPage() {
               <span className="display-italic text-rose">{t('vier Wimpern.', 'four sets of lashes.')}</span>
             </h2>
           </Reveal>
-          <div className="grid md:grid-cols-2 gap-5 md:gap-6">
-            {studio.team.map((m, i) => (
-              <Reveal key={m.firstName} kind="rise" scroll delay={i * 0.1}>
-                <div className={`relative ${i === 0 ? 'aura-pmu' : 'aura-lashes'} rounded-3xl p-7 md:p-10 overflow-hidden tile-hover hairline border min-h-[220px]`}>
-                  <div className="relative z-10">
-                    <p className="eyebrow text-rose mb-4">0{i + 1}</p>
-                    <p className="font-display text-4xl md:text-5xl text-pearl leading-tight mb-2">
-                      {m.firstName}
-                    </p>
-                    <p className="text-mist text-sm">{pick(m.roleDE, m.roleEN)}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal kind="rise-blur" scroll>
+            <div
+              className="relative photo-tile rounded-3xl overflow-hidden border hairline aspect-[4/5] md:aspect-[16/10] max-h-[680px]"
+              style={{ backgroundImage: 'url(/photos/team.jpg)', backgroundPosition: 'center 30%' }}
+            >
+              <div className="relative z-10 h-full flex flex-col justify-end p-7 md:p-12">
+                <p className="eyebrow text-rose mb-3">{t('Inhaberin & Team', 'Owner & team')}</p>
+                <p className="font-display text-4xl md:text-6xl text-pearl leading-tight mb-2">
+                  Rabia <span className="display-italic text-rose">&</span> Christina
+                </p>
+                <p className="text-pearl-soft text-sm md:text-base max-w-md">
+                  {t(
+                    'PMU Artist & Beauty-Spezialistin — gemeinsam in der Niederwerrner Straße.',
+                    'PMU artist & beauty specialist — together on Niederwerrner Straße.'
+                  )}
+                </p>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 

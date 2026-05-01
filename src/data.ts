@@ -22,8 +22,8 @@ export const studio = {
     roleEN: "Owner & PMU Artist",
   },
   team: [
-    { firstName: "Rabia", roleDE: "Inhaberin & PMU Artist", roleEN: "Owner & PMU Artist" },
-    { firstName: "Christina", roleDE: "Beauty-Spezialistin", roleEN: "Beauty Specialist" },
+    { firstName: "Rabia", roleDE: "Inhaberin & PMU Artist", roleEN: "Owner & PMU Artist", photo: "/photos/team.jpg" },
+    { firstName: "Christina", roleDE: "Beauty-Spezialistin", roleEN: "Beauty Specialist", photo: "/photos/team.jpg" },
   ],
   hero: {
     eyebrowDE: "Studio · Schweinfurt",
@@ -87,6 +87,8 @@ export interface ServiceFamily {
   descriptionEN: string;
   auraClass: string;
   accent: string;
+  /** Real studio photo for tile/section background */
+  photo: string;
   ritualDE: string[];
   ritualEN: string[];
   /** Optional sub-groups inside a family — used for long lists like Body & Beyond. */
@@ -113,6 +115,7 @@ export const services: ServiceFamily[] = [
     descriptionEN: 'Permanent make-up is pigment technique, not a tattoo. With the finest needle, mineral pigments are placed into the upper skin layer — natural, soft, tuned to your skin type and look. Every treatment includes a touch-up at 4 weeks.',
     auraClass: 'aura-pmu',
     accent: 'copper',
+    photo: '/photos/neon-pmu.jpg',
     ritualDE: [
       'Kostenlose Erstberatung — Form, Farbe, Erwartung',
       'Vorzeichnung & Freigabe',
@@ -153,6 +156,7 @@ export const services: ServiceFamily[] = [
     descriptionEN: 'Classic 1:1 extensions for natural length, soft volume for more depth, deluxe volume for maximum effect. Each lash glued individually to your natural lash. Lasts 4–6 weeks with refill. Lash lifting raises your own lashes for 6–8 weeks — no glue, no refill.',
     auraClass: 'aura-lashes',
     accent: 'violet',
+    photo: '/photos/eye-lashes.jpg',
     ritualDE: [
       'Stilberatung — Classic, Volumen oder Lift',
       'Mapping auf deine Augenform',
@@ -209,6 +213,7 @@ export const services: ServiceFamily[] = [
     descriptionEN: 'Classic oriental thread threading removes hairs exactly where needed. Hybrid brows combine tint and henna for a defined shape without permanent pigment. Brow lifting sets your brow hairs in a lifted, defined position for 6–8 weeks.',
     auraClass: 'aura-brows',
     accent: 'gold',
+    photo: '/photos/lash-serum.jpg',
     ritualDE: [
       'Vermessung & goldener Schnitt',
       'Form festlegen',
@@ -261,6 +266,7 @@ export const services: ServiceFamily[] = [
     descriptionEN: 'Aquafacial cleanses the skin with vacuum and active rinse — gentle but deep, with integrated light therapy. Three levels depending on skin goal. Microneedling triggers collagen, visible after 3–5 sessions. Also for the back: Aqua-back deep cleanse against breakouts on shoulders and back.',
     auraClass: 'aura-skin',
     accent: 'rose',
+    photo: '/photos/treatment-room.jpg',
     ritualDE: [
       'Kostenlose Hautanalyse',
       'Reinigung & Vorbereitung',
@@ -321,6 +327,7 @@ export const services: ServiceFamily[] = [
     descriptionEN: 'G8 anti-cellulite with controlled vacuum suction — targeted by body zone. Waxing with high-quality wax in every area of the face. Classic pedicure for healthy, cared-for feet. Free body forming consultation any time.',
     auraClass: 'aura-body',
     accent: 'pearl-glow',
+    photo: '/photos/skin-face.jpg',
     ritualDE: [
       'Beratung & Zielfestlegung',
       'Vorbereitung der Zone',
